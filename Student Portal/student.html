@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <script src="script1.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Student Portal</title>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h3>E-Vidyalaya</h3>
+        </div>
+        <div class="user-details">
+            <div class="user-info-text">
+                <p id="user-name">Name: </p>
+                <p id="user-class">Class: 10th A</p>
+                <p id="user-sec">Section: B</p>
+                <p id="user-roll">Roll No: 25</p>
+            </div>
+            <div class="user-options">
+                <i class="fa-solid fa-circle-user options-icon"></i>
+                <div class="options-menu hidden">
+                    <a href="../profile.html">Profile</a>
+                    <a href="../help-support.html">Help & Support</a>
+                    <a href="../login-signup.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="active"><a href="student.html"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+            <li><a href="Attendance.html"><i class="fa-solid fa-user-check"></i><span>Attendance</span></a></li>
+            <li><a href="academic-records.html"><i class="fa-solid fa-book"></i><span>Academic Records</span></a></li>
+            <li><a href="assignments.html"><i class="fa-solid fa-pen-to-square"></i><span>Assignments</span></a></li>
+            <li><a href="Announcement.html"><i class="fa-solid fa-bullhorn"></i><span>Announcement</span></a></li>
+            <li><a href="Fees.html"><i class="fa-solid fa-money-bill"></i><span>Fees</span></a></li>
+            <li><a href="Online class.html"><i class="fa-solid fa-video"></i><span>Online Class</span></a></li>
+            <li><a href="chat.html"><i class="fa-solid fa-comment"></i><span>Chat</span></a></li>
+            <li><a href="timetable.html"><i class="fa-solid fa-calendar-days"></i><span>Timetable</span></a></li>
+            
+        </ul>
+        <div class="nav-logout">
+            <a href="../help-support.html"><i class="fa-solid fa-circle-question"></i><span>Help & Support</span></a>
+            <a href="../login-signup.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <div class="school-info">
+                <h2 id="school-name">Your School Name</h2>
+                <div class="school-logo"></div>
+            </div>
+        </div>
+
+    <main id="main-content">
+        <header class="main-header">
+            <img src="https://i.pravatar.cc/150" alt="User Profile" class="user-img">
+            <h1 id="welcome-message">Welcome!</h1>
+        </header>
+
+        <hr>
+
+        <section class="tabs-container">
+            <button class="tab active">Dashboard</button>
+            <button class="tab">My Grades</button>
+            <button class="tab">Attendance</button>
+            <button class="tab">Events</button>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="updates-section">
+            <div class="update-column">
+                <h2><i class="fa-solid fa-bell"></i> Notifications</h2>
+                <ul class="update-list">
+                    <li>
+                        <p><strong>Fee Payment Due:</strong> Your semester fee is due on 25th Dec.</p>
+                        <span class="timestamp">2 days ago</span>
+                    </li>
+                    <li>
+                        <p><strong>Library Books:</strong> 'Intro to Physics' is overdue.</p>
+                        <span class="timestamp">5 days ago</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="update-column">
+                <h2><i class="fa-solid fa-calendar-star"></i> Upcoming Events</h2>
+                <ul class="update-list">
+                    <li>
+                        <p><strong>Annual Sports Day:</strong> Get ready for a day of fun and competition!</p>
+                        <span class="timestamp">Starts in 1 week</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="update-column">
+                <h2><i class="fa-solid fa-clipboard-list"></i> Recent Assignments</h2>
+                <ul class="update-list">
+                    <li>
+                        <p><strong>History:</strong> Essay on World War II is due tomorrow.</p>
+                        <span class="timestamp">Due in 1 day</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    </div>
+</body>
+</html>

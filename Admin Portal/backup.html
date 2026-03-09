@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Backup - Admin Portal</title>
+    <link rel="stylesheet" href="style3.css">
+    <script src="script3.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-user-shield"></i>
+            <h3>Admin Panel</h3>
+        </div>
+        <div class="user-details">
+            <div class="user-info">
+                <p id="user-name">Name: Admin User</p>
+            </div>
+            <div class="user-options">
+                <i class="fa-solid fa-ellipsis-vertical options-icon"></i>
+                <div class="options-menu hidden">
+                    <a href="../profile.html">Profile</a>
+                    <a href="../help-support.html">Help & Support</a>
+                    <a href="../login-signup.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="admin.html"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a></li>
+            <li><a href="manage-users.html"><i class="fa-solid fa-users-cog"></i><span>Manage Users</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-bullhorn"></i><span>Global Announcements</span></a></li>
+            <li><a href="reports.html"><i class="fa-solid fa-chart-line"></i><span>System Reports</span></a></li>
+            <li><a href="system-settings.html"><i class="fa-solid fa-cogs"></i><span>Settings</span></a></li>
+        </ul>
+        <div class="nav-logout">
+            <a href="../login-signup.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <h2 id="school-name">E-Vidyalaya Administration</h2>
+            <div class="school-logo" style="background-image: url('../School Png PNG Transparent With Clear Background ID 137543 _ TopPNG.jpg'); background-size: cover; background-position: center;"></div>
+        </div>
+
+        <main id="main-content">
+            <header class="main-header">
+                <h1>Database Backup</h1>
+            </header>
+            <hr>
+            <section class="page-content">
+                <div style="background: white; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #eee; margin-bottom: 30px;">
+                    <i class="fa-solid fa-database" style="font-size: 48px; color: var(--primary-color); margin-bottom: 20px;"></i>
+                    <h2 style="margin-bottom: 10px;">Create New Backup</h2>
+                    <p style="color: #666; margin-bottom: 20px;">Download a complete SQL dump of the current database state.</p>
+                    <button id="create-backup-btn" class="btn" style="background: var(--primary-color); color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 16px;"><i class="fa-solid fa-download"></i> Download Backup</button>
+                </div>
+
+                <h3>Previous Backups</h3>
+                <div style="background: white; border-radius: 8px; border: 1px solid #eee; overflow: hidden; margin-top: 15px;">
+                    <div style="padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>backup_2023_10_25.sql</strong>
+                            <p style="font-size: 12px; color: #999;">Size: 45MB</p>
+                        </div>
+                        <button class="restore-btn" style="color: var(--primary-color); background: none; border: none; cursor: pointer;">Restore</button>
+                    </div>
+                    <div style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>backup_2023_10_18.sql</strong>
+                            <p style="font-size: 12px; color: #999;">Size: 44MB</p>
+                        </div>
+                        <button class="restore-btn" style="color: var(--primary-color); background: none; border: none; cursor: pointer;">Restore</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

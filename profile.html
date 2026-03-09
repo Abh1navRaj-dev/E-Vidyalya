@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>User Profile - E-Vidyalaya</title>
+</head>
+<body class="profile-page-body">
+    <div class="profile-container">
+        <!-- Header with Back Button -->
+        <div class="profile-header-nav">
+            <button id="back-to-dashboard" class="btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <h2>My Profile</h2>
+        </div>
+
+        <div class="profile-content-grid">
+            <!-- Left Column: Identity Card -->
+            <div class="profile-card">
+                <div class="profile-img-container">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="Profile Picture" id="profile-pic">
+                    <button class="edit-pic-btn"><i class="fa-solid fa-camera"></i></button>
+                </div>
+                <h2 id="profile-name">User Name</h2>
+                <p id="profile-role" class="role-badge">Role</p>
+                <p id="profile-email"><i class="fa-solid fa-envelope"></i> email@example.com</p>
+                
+                <div class="profile-actions">
+                    <button class="btn" id="logout-btn">Logout</button>
+                </div>
+            </div>
+
+            <!-- Right Column: Details & Settings -->
+            <div class="profile-details-section">
+                <div class="details-tabs">
+                    <button class="tab-btn active" data-tab="personal">Personal Details</button>
+                    <button class="tab-btn" data-tab="account">Account Settings</button>
+                </div>
+
+                <!-- Personal Details Content -->
+                <div class="details-content active" data-content="personal">
+                    <h3>Personal Information</h3>
+                    <form class="profile-form">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Full Name</label>
+                                <input type="text" id="detail-name" value="User Name" readonly>
+                            </div>
+                            <div class="input-group">
+                                <label>Phone Number</label>
+                                <input type="text" id="detail-phone" value="+91 98765 43210">
+                            </div>
+                            <div class="input-group">
+                                <label>Gender</label>
+                                <input type="text" id="detail-gender" value="Not Specified" readonly>
+                            </div>
+                            <!-- Dynamic Fields based on Role -->
+                            <div class="input-group" id="dynamic-field-1-group">
+                                <label id="dynamic-label-1">Class/ID</label>
+                                <input type="text" id="dynamic-field-1" value="-" readonly>
+                            </div>
+                            <div class="input-group" id="dynamic-field-2-group">
+                                <label id="dynamic-label-2">Section/Subjects</label>
+                                <input type="text" id="dynamic-field-2" value="-" readonly>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn" id="save-personal-details">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Account Settings Content -->
+                <div class="details-content" data-content="account">
+                    <h3>Account Settings</h3>
+                    <h4>Change Password</h4>
+                    <form class="profile-form">
+                        <div class="input-group">
+                            <label>Current Password</label>
+                            <input type="password" id="current-password" placeholder="Enter your current password">
+                            <i class="fa-solid fa-eye-slash toggle-password"></i>
+                        </div>
+                        <div class="input-group">
+                            <label>New Password</label>
+                            <input type="password" id="new-password" placeholder="Enter a new password">
+                            <i class="fa-solid fa-eye-slash toggle-password"></i>
+                        </div>
+                        <div class="input-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="confirm-password" placeholder="Confirm the new password">
+                            <i class="fa-solid fa-eye-slash toggle-password"></i>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn" id="update-password-btn">Update Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

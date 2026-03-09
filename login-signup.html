@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <header>
+
+    </header>
+<div class="main_wrapper">
+    <div class="login_wrapper">
+        <div class="login-branding">
+            <!-- You can place your logo here -->
+            <i class="fa-solid fa-graduation-cap logo-icon"></i>
+            <h2>E-Vidyalaya</h2>
+            <p>Your digital campus companion.</p>
+        </div>
+        <div class="form-container">
+            <h1>Login</h1>
+            <form action="">
+                <div class="input-group">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <select class="role_options" id="role_select" name="role">
+                        <option value="" disabled selected>Select your Role</option>
+                        <option value="Student">Student</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Principal">Principal</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Parent">Parent</option>
+                        <option value="staff">Staff</option>
+                    </select>
+                </div>
+
+                <!-- Fields for Staff (Admin, Teacher, etc.) -->
+                <div id="staff-login-fields" class="hidden">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="username" id="username" placeholder="Enter your name">
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" name="email" id="email" placeholder="Enter your Email">
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" name="phone" id="phone" placeholder="Enter your Phone Number">
+                    </div>
+                    <div class="gender-group">
+                        <label>Gender:</label>
+                        <input type="radio" id="gender_male" name="gender" value="male">
+                        <label for="gender_male">Male</label>
+                        <input type="radio" id="gender_female" name="gender" value="female">
+                        <label for="gender_female">Female</label>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-building"></i>
+                        <textarea name="organization_name" id="organization_name" placeholder="Enter your Organization Name"></textarea>
+                    </div>
+                </div>
+
+                <!-- Common Fields -->
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="password" id="password" placeholder="Enter your Password">
+                    <i class="fa-solid fa-eye-slash toggle-password"></i>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-key"></i>
+                    <input type="text" name="organization_key" id="organization_key" placeholder="Enter your Organization Key">
+                </div>
+
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember_me" name="remember_me">
+                        <label for="remember_me">Remember Me</label>
+                    </div>
+                    <a href="#" id="forgot-password-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+                <button type="button" class="btn new_user">New user? Sign up here</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Developer Access Trigger -->
+<div id="dev-access-btn" title="Developer Access">
+    <i class="fa-solid fa-code"></i>
+</div>
+
+<!-- Developer Login Modal -->
+<div id="dev-login-modal" class="hidden">
+    <div class="dev-modal-content">
+        <span class="close-dev-modal">&times;</span>
+        <h2><i class="fa-solid fa-user-secret"></i> Dev Access</h2>
+        <form id="dev-login-form">
+            <div class="input-group">
+                <i class="fa-solid fa-id-badge"></i>
+                <input type="text" id="dev_id" placeholder="Dev ID">
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-box-open"></i>
+                <input type="text" id="product_id" placeholder="Product ID">
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="dev_pin" placeholder="Special PIN">
+                <i class="fa-solid fa-eye-slash toggle-password"></i>
+            </div>
+            <button type="submit" class="btn">Access Dashboard</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

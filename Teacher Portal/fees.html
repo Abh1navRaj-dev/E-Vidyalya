@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <script src="script2.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Fee Management - Teacher Portal</title>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <h3>Teacher Portal</h3>
+        </div>
+        <div class="user-details">
+            <div class="user-info-text">
+                <p id="user-name">Name: </p>
+                <p id="user-class-teacher">Class Teacher: </p>
+                <p id="user-subjects">Subjects: </p>
+                <p id="user-id">Teacher ID: </p>
+            </div>
+            <div class="user-options">
+                <i class="fa-solid fa-circle-user options-icon"></i>
+                <div class="options-menu hidden">
+                    <a href="../profile.html">Profile</a>
+                    <a href="../help-support.html">Help & Support</a>
+                    <a href="../login-signup.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="teacher.html"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+            <li><a href="my-classes.html"><i class="fa-solid fa-users"></i><span>My Classes</span></a></li>
+            <li><a href="attendance.html"><i class="fa-solid fa-user-check"></i><span>Attendance</span></a></li>
+            <li><a href="gradebook.html"><i class="fa-solid fa-pen-to-square"></i><span>Gradebook</span></a></li>
+            <li><a href="announcements.html"><i class="fa-solid fa-bullhorn"></i><span>Announcements</span></a></li>
+            <li class="active"><a href="fees.html"><i class="fa-solid fa-money-bill"></i><span>Fees</span></a></li>
+            <li><a href="chat.html"><i class="fa-solid fa-comment"></i><span>Chat</span></a></li>
+        </ul>
+        <div class="nav-logout">
+            <a href="../login-signup.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <div class="school-info">
+                <h2 id="school-name">Your School Name</h2>
+                <div class="school-logo"></div>
+            </div>
+        </div>
+
+        <main id="main-content">
+            <header class="main-header">
+                <h1>Fee Status Management</h1>
+            </header>
+
+            <section class="page-content">
+                <div class="fee-controls">
+                    <div class="control-group">
+                        <label for="class-select-fee">Filter by Class:</label>
+                        <select id="class-select-fee">
+                            <option value="all">All My Classes</option>
+                            <option value="10-B">Class 10 - Section B</option>
+                            <option value="10-C">Class 10 - Section C</option>
+                            <option value="9-A">Class 9 - Section A</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Filter by Status:</label>
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="paid">Paid</button>
+                        <button class="filter-btn" data-filter="due">Due</button>
+                    </div>
+                </div>
+
+                <table class="fee-status-table">
+                    <thead>
+                        <tr>
+                            <th>Roll No.</th>
+                            <th>Student Name</th>
+                            <th>Class</th>
+                            <th>Status</th>
+                            <th>Months Due</th>
+                            <th>Amount Due (₹)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-status="paid" data-class="10-B">
+                            <td>1</td>
+                            <td>Aarav Sharma</td>
+                            <td>10-B</td>
+                            <td><span class="status-tag status-paid">Paid</span></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-status="due" data-class="10-B">
+                            <td>2</td>
+                            <td>Diya Patel</td>
+                            <td>10-B</td>
+                            <td><span class="status-tag status-due">Due</span></td>
+                            <td>2</td>
+                            <td>41,000</td>
+                            <td><button class="btn-sm btn-reminder">Send Reminder</button></td>
+                        </tr>
+                        <tr data-status="paid" data-class="10-C">
+                            <td>1</td>
+                            <td>Rohan Verma</td>
+                            <td>10-C</td>
+                            <td><span class="status-tag status-paid">Paid</span></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-status="due" data-class="9-A">
+                            <td>1</td>
+                            <td>Priya Mehra</td>
+                            <td>9-A</td>
+                            <td><span class="status-tag status-due">Due</span></td>
+                            <td>1</td>
+                            <td>20,500</td>
+                            <td><button class="btn-sm btn-reminder">Send Reminder</button></td>
+                        </tr>
+                        <!-- More students -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

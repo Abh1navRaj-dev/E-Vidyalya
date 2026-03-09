@@ -1,0 +1,963 @@
+/* ================================================ */
+/* STYLES FOR: login-signup.html, new-user-ls.html, student-details-login.html */
+/* ================================================ */
+
+/* CSS reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #003366;
+    --primary-hover-color: #002855;
+    --secondary-bg: #f0f0f0;
+    --text-light: #fff;
+    --text-dark: #333;
+    --text-muted: #555;
+    --border-color: #ddd;
+    --border-radius-md: 10px;
+    --border-radius-sm: 5px;
+}
+
+body{
+    background-color: var(--text-dark);
+}
+.hidden {
+    display: none !important;
+}
+/* login-signup.html */
+.login_wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    max-width: 90vw;
+    background: var(--text-light);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    height: auto; /* Let content define height */
+    display: grid;
+    grid-template-columns: 40% 60%;
+    overflow: hidden; /* Keeps child corners rounded */
+}
+
+.login-branding {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.login-branding .logo-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.login-branding h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+}
+
+.login-branding p {
+    opacity: 0.9;
+}
+
+.form-container {
+    padding: 30px 40px;
+}
+.login_wrapper h1{
+    color: var(--text-dark);
+    font-size: 26px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Form container */
+.login_wrapper form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Group for icon and input field */
+.input-group {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 15px;
+}
+
+/* Styling for all text inputs, textareas, and select dropdowns */
+.input-group input,
+.input-group textarea,
+.input-group select {
+    width: 100%;
+    padding: 10px 15px 10px 45px; /* Make space for the icon on the left */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 15px;
+    color: var(--text-dark);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    min-height: 60px;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Eye icon for password toggle */
+.input-group .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* Placeholder text style */
+::placeholder {
+    color: #999;
+}
+
+/* Gender selection styling */
+.gender-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    font-family: sans-serif;
+}
+
+.gender-group input[type="radio"] {
+    margin-left: 10px;
+}
+
+/* Button Styling */
+.btn, .btn-secondary, .btns {
+    padding: 10px 20px;
+    border-radius: var(--border-radius-sm);
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 8px;
+}
+
+.btn, .btns {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.btn:hover, .btns:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-bg);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: #e0e0e0;
+}
+
+/* Forgot Password Link */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.form-options a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.form-options a:hover {
+    text-decoration: underline;
+}
+
+/* new-user-ls.html */
+#Select_your_organization_type {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    text-align: center;
+    padding: 20px;
+    overflow: hidden; /* Prevents animations from showing scrollbars */
+}
+
+#Select_your_organization_type h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 36px;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+#Select_your_organization_type .subtitle {
+    font-size: 18px;
+    color: #7f8c8d;
+    margin-bottom: 60px;
+    max-width: 500px;
+}
+
+.org-options {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 50px;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 15px 40px rgba(44, 62, 80, 0.1);
+}
+
+.org-choice {
+    position: relative;
+    height: 280px;
+    width: 220px;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.org-choice.coaching {
+    animation-delay: 0.2s;
+}
+.org-choice.school {
+    animation-delay: 0.4s;
+}
+.org-choice.uc {
+    animation-delay: 0.6s;
+}
+
+.org-choice:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.org-choice:hover img {
+    transform: scale(1.1);
+}
+
+.org-choice img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.org-choice h2 {
+    position: relative;
+    z-index: 2;
+    color: var(--text-light);
+    font-family: sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.org-choice::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    z-index: 1;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .login_wrapper {
+        grid-template-columns: 1fr;
+        width: 95vw;
+        max-width: 500px;
+    }
+
+    .login-branding {
+        display: none; /* Hide branding on smaller screens to save space */
+    }
+
+    #Select_your_organization_type h1 {
+        font-size: 28px;
+    }
+
+    #Select_your_organization_type .subtitle {
+        margin-bottom: 40px;
+    }
+
+    .org-options {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 20px;
+    }
+
+    .org-choice {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+/* ================================================ */
+/* STYLES FOR: index.html (Dev Dashboard) */
+/* ================================================ */
+
+body.dev-dashboard-body {
+    display: flex;
+    background-color: var(--secondary-bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Layout copied from Student Portal --- */
+.dev-dashboard-body #navbar {
+    width: 250px;
+    height: 100vh;
+    background-color: var(--primary-color);
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.dev-dashboard-body .nav-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dev-dashboard-body .nav-profile i {
+    font-size: 30px;
+}
+
+.dev-dashboard-body .nav-menu {
+    list-style: none;
+    margin-top: 15px;
+    flex-grow: 1;
+}
+
+.dev-dashboard-body .nav-menu li a, .dev-dashboard-body .nav-logout a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: #bdc3c7;
+    padding: 15px 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dev-dashboard-body .nav-menu li a:hover, .dev-dashboard-body .nav-logout a:hover {
+    background-color: #0069d9;
+    color: #fff;
+}
+
+.dev-dashboard-body .nav-menu li a i, .dev-dashboard-body .nav-logout a i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+}
+
+.dev-dashboard-body .nav-logout {
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dev-dashboard-body .content-wrapper {
+    flex-grow: 1;
+    margin-left: 250px;
+}
+
+.dev-dashboard-body #top-bar {
+    background-color: #fff;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.dev-dashboard-body #menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.dev-dashboard-body #school-name {
+    flex-grow: 1;
+}
+
+.dev-dashboard-body .school-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.dev-dashboard-body #main-content {
+    padding: 40px;
+}
+
+.dev-dashboard-body .main-header {
+    margin-bottom: 40px;
+}
+
+.dev-dashboard-body .main-header h1 {
+    font-size: 24px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.dev-dashboard-body .page-content {
+    background-color: transparent; /* No white background needed here */
+    padding: 0;
+}
+
+/* --- Card styles from previous version --- */
+.dev-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.dev-card {
+    background-color: #fff;
+    border-radius: var(--border-radius-md);
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    scroll-margin-top: 20px; /* For anchor links */
+}
+
+.dev-card:hover {
+    transform: translateY(-5px);
+}
+
+.dev-card h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--secondary-bg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dark);
+}
+
+.dev-card h2 i {
+    color: var(--primary-color);
+}
+
+.dev-card .note {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dev-link-list {
+    list-style: none;
+    padding: 0;
+}
+
+.dev-link-list li {
+    margin-bottom: 10px;
+}
+
+.dev-link-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: var(--secondary-bg);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.dev-link-list a:hover {
+    background-color: #fff;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0,123,255,0.15);
+    color: var(--primary-color);
+}
+
+.dev-link-list .link-text {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.dev-link-list .path {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 12px;
+    color: #888;
+    background: rgba(0,0,0,0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.dev-link-list a:hover .path {
+    background: rgba(0,123,255,0.1);
+    color: var(--primary-color);
+}
+
+/* --- Responsive styles for Dev Dashboard Layout --- */
+@media (max-width: 992px) {
+    .dev-dashboard-body #navbar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .dev-dashboard-body #navbar.open {
+        transform: translateX(0);
+    }
+
+    .dev-dashboard-body .content-wrapper {
+        margin-left: 0;
+    }
+
+    .dev-dashboard-body #menu-toggle {
+        display: block;
+    }
+}
+
+/* ================================================ */
+/* STYLES FOR: profile.html */
+/* ================================================ */
+.profile-page-body {
+    background-color: var(--secondary-bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.profile-header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.profile-header-nav h2 {
+    color: var(--text-dark);
+}
+
+.profile-content-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+}
+
+.profile-card, .profile-details-section {
+    background: #fff;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    padding: 30px;
+}
+
+.profile-card {
+    text-align: center;
+    height: fit-content;
+}
+
+.profile-img-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+}
+
+.profile-img-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--secondary-bg);
+}
+
+.edit-pic-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.role-badge {
+    background: #eaf2ff;
+    color: var(--primary-color);
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.profile-details-section h3 {
+    margin-bottom: 25px;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.profile-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+}
+
+@media (max-width: 768px) {
+    .profile-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.details-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-muted);
+    position: relative;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    border-bottom-color: var(--primary-color);
+}
+
+.details-content {
+    display: none;
+}
+
+.details-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-form input[readonly] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+    color: #6c757d;
+}
+
+.profile-details-section h4 {
+    font-size: 18px;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+.profile-form .input-group {
+    margin-bottom: 15px;
+}
+
+/* ================================================ */
+/* STYLES FOR: Developer Access (login-signup.html) */
+/* ================================================ */
+#dev-access-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--text-dark);
+    color: var(--text-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s, background-color 0.3s;
+    z-index: 1000;
+}
+
+#dev-access-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--primary-color);
+}
+
+#dev-login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dev-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.dev-modal-content h2 {
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.close-dev-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-dev-modal:hover {
+    color: var(--text-dark);
+}
+
+/* ================================================ */
+/* STYLES FOR: help-support.html */
+/* ================================================ */
+.help-page-body {
+    background-color: var(--secondary-bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.help-container {
+    width: 100%;
+    max-width: 1100px;
+}
+
+.help-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.help-header-nav h1 {
+    color: var(--text-dark);
+}
+
+.help-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.faq-section, .contact-form-section {
+    background: #fff;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    padding: 30px;
+}
+
+.faq-section h2, .contact-form-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-form-section p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 20px 0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-dark);
+}
+
+.faq-question::after {
+    content: '\f078'; /* Font Awesome chevron-down */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    transition: transform 0.3s;
+}
+
+.faq-question.active::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+.faq-answer p {
+    padding: 0 0 20px 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+#support-form .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+@media (max-width: 992px) {
+    .help-content-grid {
+        grid-template-columns: 1fr;
+    }
+}

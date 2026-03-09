@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <!-- Jitsi Meet External API Script -->
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <script src="script1.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Online Class - Student Portal</title>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h3>E-Vidyalaya</h3>
+        </div>
+        <div class="user-details">
+            <div class="user-info-text">
+                <p id="user-name">Name: </p>
+                <p id="user-class">Class: </p>
+                <p id="user-sec">Section: </p>
+                <p id="user-roll">Roll No: </p>
+            </div>
+            <div class="user-options">
+                <i class="fa-solid fa-circle-user options-icon"></i>
+                <div class="options-menu hidden">
+                    <a href="../profile.html">Profile</a>
+                    <a href="../help-support.html">Help & Support</a>
+                    <a href="../login-signup.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="student.html"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+            <li><a href="Attendance.html"><i class="fa-solid fa-user-check"></i><span>Attendance</span></a></li>
+            <li><a href="academic-records.html"><i class="fa-solid fa-book"></i><span>Academic Records</span></a></li>
+            <li><a href="assignments.html"><i class="fa-solid fa-pen-to-square"></i><span>Assignments</span></a></li>
+            <li><a href="Announcement.html"><i class="fa-solid fa-bullhorn"></i><span>Announcement</span></a></li>
+            <li><a href="Fees.html"><i class="fa-solid fa-money-bill"></i><span>Fees</span></a></li>
+            <li class="active"><a href="Online class.html"><i class="fa-solid fa-video"></i><span>Online Class</span></a></li>
+            <li><a href="chat.html"><i class="fa-solid fa-comment"></i><span>Chat</span></a></li>
+            <li><a href="timetable.html"><i class="fa-solid fa-calendar-days"></i><span>Timetable</span></a></li>
+        </ul>
+        <div class="nav-logout">
+            <a href="../help-support.html"><i class="fa-solid fa-circle-question"></i><span>Help & Support</span></a>
+            <a href="../login-signup.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <h2 id="school-name">Your School Name</h2>
+            <div class="school-logo"></div>
+        </div>
+
+        <main id="main-content">
+            <header class="main-header">
+                <h1>Online Class</h1>
+            </header>
+
+            <section class="page-content">
+                <div class="online-class-setup">
+                    <h2>Start or Join a Class</h2>
+                    <p>Teachers: Enter a unique name for your class. <br> Students: Enter the class name provided by your teacher.</p>
+                    <div class="input-group">
+                        <i class="fa-solid fa-chalkboard"></i>
+                        <input type="text" id="room-name" placeholder="E.g., Grade10-Maths-Chapter5">
+                    </div>
+                    <!-- This section will be shown only to teachers -->
+                    <div id="teacher-password-setup" class="hidden">
+                        <input type="text" id="room-password" placeholder="Set a Password for the class (optional)">
+                    </div>
+                    <button id="start-join-btn" class="btn">Join Class</button>
+                </div>
+
+                <!-- Jitsi meeting will be embedded here -->
+                <div id="jitsi-container" class="hidden"></div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

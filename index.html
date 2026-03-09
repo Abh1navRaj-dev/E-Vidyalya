@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>E-Vidyalaya - Dev Dashboard</title>
+</head>
+<body class="dev-dashboard-body">
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-code"></i>
+            <h3>Dev Dashboard</h3>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#auth-flow"><i class="fa-solid fa-right-to-bracket"></i><span>Auth Flow</span></a></li>
+            <li><a href="#student-portal"><i class="fa-solid fa-graduation-cap"></i><span>Student Portal</span></a></li>
+            <li><a href="#teacher-portal"><i class="fa-solid fa-chalkboard-user"></i><span>Teacher Portal</span></a></li>
+            <li><a href="#admin-portal"><i class="fa-solid fa-user-shield"></i><span>Admin Portal</span></a></li>
+        </ul>
+        <div class="nav-logout">
+            <a href="login-signup.html"><i class="fa-solid fa-arrow-left"></i><span>Back to Login</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <h2 id="school-name">E-Vidyalaya Project</h2>
+            <div class="school-logo" style="background-image: url('School Png PNG Transparent With Clear Background ID 137543 _ TopPNG.jpg'); background-size: cover; background-position: center;"></div>
+        </div>
+
+        <main id="main-content">
+            <header class="main-header">
+                <h1>Module Quick Links</h1>
+            </header>
+
+            <section class="page-content">
+                <div class="dev-grid">
+                    <div class="dev-card" id="auth-flow">
+                        <h2><i class="fa-solid fa-right-to-bracket"></i> Auth Flow</h2>
+                        <ul class="dev-link-list">
+                            <li><a href="login-signup.html" target="_blank"><span class="link-text">Main Login</span><span class="path">login-signup.html</span></a></li>
+                            <li><a href="student-details-login.html" target="_blank"><span class="link-text">Student Details (Step 2)</span><span class="path">student-details-login.html</span></a></li>
+                            <li><a href="teacher-details-login.html" target="_blank"><span class="link-text">Teacher Details (Step 2)</span><span class="path">teacher-details-login.html</span></a></li>
+                            <li><a href="new-user-ls.html" target="_blank"><span class="link-text">Org Signup</span><span class="path">new-user-ls.html</span></a></li>
+                        </ul>
+                    </div>
+        
+                    <div class="dev-card" id="student-portal">
+                        <h2><i class="fa-solid fa-graduation-cap"></i> Student Portal</h2>
+                        <p class="note"><i class="fa-solid fa-circle-info"></i> Login first to set session data.</p>
+                        <ul class="dev-link-list">
+                            <li><a href="Student Portal/student.html" target="_blank"><span class="link-text">Dashboard</span><span class="path">student.html</span></a></li>
+                            <li><a href="Student Portal/Attendance.html" target="_blank"><span class="link-text">Attendance</span><span class="path">Attendance.html</span></a></li>
+                            <li><a href="Student Portal/academic-records.html" target="_blank"><span class="link-text">Academic Records</span><span class="path">academic-records.html</span></a></li>
+                            <li><a href="Student Portal/assignments.html" target="_blank"><span class="link-text">Assignments</span><span class="path">assignments.html</span></a></li>
+                            <li><a href="Student Portal/Online class.html" target="_blank"><span class="link-text">Online Class</span><span class="path">Online class.html</span></a></li>
+                            <li><a href="Student Portal/Fees.html" target="_blank"><span class="link-text">Fees</span><span class="path">Fees.html</span></a></li>
+                            <li><a href="Student Portal/chat.html" target="_blank"><span class="link-text">Chat</span><span class="path">chat.html</span></a></li>
+                            <li><a href="Student Portal/timetable.html" target="_blank"><span class="link-text">Timetable</span><span class="path">timetable.html</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dev-card" id="teacher-portal">
+                        <h2><i class="fa-solid fa-chalkboard-user"></i> Teacher Portal</h2>
+                        <p class="note"><i class="fa-solid fa-circle-info"></i> Login as a Teacher/Principal first.</p>
+                        <ul class="dev-link-list">
+                            <li><a href="Teacher Portal/teacher.html" target="_blank"><span class="link-text">Teacher Dashboard</span><span class="path">teacher.html</span></a></li>
+                            <li><a href="Teacher Portal/my-classes.html" target="_blank"><span class="link-text">My Classes</span><span class="path">my-classes.html</span></a></li>
+                            <li><a href="Teacher Portal/attendance.html" target="_blank"><span class="link-text">Attendance</span><span class="path">attendance.html</span></a></li>
+                            <li><a href="Teacher Portal/gradebook.html" target="_blank"><span class="link-text">Gradebook</span><span class="path">gradebook.html</span></a></li>
+                            <li><a href="Teacher Portal/announcements.html" target="_blank"><span class="link-text">Announcements</span><span class="path">announcements.html</span></a></li>
+                            <li><a href="Teacher Portal/fees.html" target="_blank"><span class="link-text">Fees</span><span class="path">fees.html</span></a></li>
+                            <li><a href="Teacher Portal/chat.html" target="_blank"><span class="link-text">Chat</span><span class="path">chat.html</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dev-card" id="admin-portal">
+                        <h2><i class="fa-solid fa-user-shield"></i> Admin Portal</h2>
+                        <p class="note"><i class="fa-solid fa-circle-info"></i> Login as an Admin first.</p>
+                        <ul class="dev-link-list">
+                            <li><a href="Admin Portal/admin.html" target="_blank"><span class="link-text">Admin Dashboard</span><span class="path">admin.html</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

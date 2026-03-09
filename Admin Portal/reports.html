@@ -1,0 +1,93 @@
+e<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Reports - Admin Portal</title>
+    <link rel="stylesheet" href="style3.css">
+    <script src="script3.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-user-shield"></i>
+            <h3>Admin Panel</h3>
+        </div>
+        <div class="user-details">
+            <div class="user-info">
+                <p id="user-name">Name: Admin User</p>
+            </div>
+            <div class="user-options">
+                <i class="fa-solid fa-ellipsis-vertical options-icon"></i>
+                <div class="options-menu hidden">
+                    <a href="../profile.html">Profile</a>
+                    <a href="../help-support.html">Help & Support</a>
+                    <a href="../login-signup.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="admin.html"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a></li>
+            <li><a href="manage-users.html"><i class="fa-solid fa-users-cog"></i><span>Manage Users</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-bullhorn"></i><span>Global Announcements</span></a></li>
+            <li class="active"><a href="reports.html"><i class="fa-solid fa-chart-line"></i><span>System Reports</span></a></li>
+            <li><a href="system-settings.html"><i class="fa-solid fa-cogs"></i><span>Settings</span></a></li>
+        </ul>
+        <div class="nav-logout">
+            <a href="../login-signup.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <h2 id="school-name">E-Vidyalaya Administration</h2>
+            <div class="school-logo" style="background-image: url('../School Png PNG Transparent With Clear Background ID 137543 _ TopPNG.jpg'); background-size: cover; background-position: center;"></div>
+        </div>
+
+        <main id="main-content">
+            <header class="main-header">
+                <h1>System Reports</h1>
+            </header>
+            <hr>
+            <section class="page-content">
+                <div class="dashboard-grid">
+                    <!-- Stat Card 1 -->
+                    <div class="dashboard-card" style="flex-direction: column; align-items: flex-start;">
+                        <h3 style="font-size: 16px; color: #666;">Total Students</h3>
+                        <p style="font-size: 32px; font-weight: bold; color: var(--primary-color); margin: 10px 0;">1,245</p>
+                        <p style="font-size: 12px; color: green;"><i class="fa-solid fa-arrow-up"></i> 5% increase</p>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div class="dashboard-card" style="flex-direction: column; align-items: flex-start;">
+                        <h3 style="font-size: 16px; color: #666;">Total Teachers</h3>
+                        <p style="font-size: 32px; font-weight: bold; color: var(--primary-color); margin: 10px 0;">84</p>
+                        <p style="font-size: 12px; color: #666;">Stable</p>
+                    </div>
+                    <!-- Stat Card 3 -->
+                    <div class="dashboard-card" style="flex-direction: column; align-items: flex-start;">
+                        <h3 style="font-size: 16px; color: #666;">Avg. Attendance</h3>
+                        <p style="font-size: 32px; font-weight: bold; color: var(--primary-color); margin: 10px 0;">87%</p>
+                        <p style="font-size: 12px; color: red;"><i class="fa-solid fa-arrow-down"></i> 2% decrease</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
+                    <h3>Recent Activity Log</h3>
+                    <ul style="list-style: none; margin-top: 15px;">
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+                            <span>New student registration: <strong>Amit Kumar</strong></span>
+                            <span style="color: #999; font-size: 12px;">2 mins ago</span>
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+                            <span>Fee payment received: <strong>ID #4421</strong></span>
+                            <span style="color: #999; font-size: 12px;">15 mins ago</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

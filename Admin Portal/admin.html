@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - E-Vidyalaya</title>
+    <link rel="stylesheet" href="style3.css">
+    <script src="script3.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-user-shield"></i>
+            <h3>Admin Panel</h3>
+        </div>
+        <div class="user-details">
+            <div class="user-info">
+                <p id="user-name">Name: Admin User</p>
+            </div>
+            <div class="user-options">
+                <i class="fa-solid fa-ellipsis-vertical options-icon"></i>
+                <div class="options-menu hidden">
+                    <a href="../profile.html">Profile</a>
+                    <a href="../help-support.html">Help & Support</a>
+                    <a href="../login-signup.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="active"><a href="admin.html"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a></li>
+            <li><a href="manage-users.html"><i class="fa-solid fa-users-cog"></i><span>Manage Users</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-bullhorn"></i><span>Global Announcements</span></a></li>
+            <li><a href="reports.html"><i class="fa-solid fa-chart-line"></i><span>System Reports</span></a></li>
+            <li><a href="system-settings.html"><i class="fa-solid fa-cogs"></i><span>Settings</span></a></li>
+        </ul>
+        <div class="nav-logout">
+            <a href="../login-signup.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <h2 id="school-name">E-Vidyalaya Administration</h2>
+            <div class="school-logo" style="background-image: url('../School Png PNG Transparent With Clear Background ID 137543 _ TopPNG.jpg'); background-size: cover; background-position: center;"></div>
+        </div>
+
+        <main id="main-content">
+            <header class="main-header">
+                <img src="https://i.pravatar.cc/150?img=68" alt="User Image" class="user-img">
+                <div>
+                    <h1 id="welcome-message">Welcome! Admin</h1>
+                    <p>Here's a summary of the system status.</p>
+                </div>
+            </header>
+            <hr>
+            <section class="page-content">
+                <div class="dashboard-grid">
+                    <!-- Card 1: User Management -->
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="card-content">
+                            <h3>User Management</h3>
+                            <p>Add, edit, or remove students, teachers, and staff.</p>
+                        </div>
+                    </div>
+                    <!-- Card 2: System Settings -->
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="fa-solid fa-cogs"></i></div>
+                        <div class="card-content">
+                            <h3>System Settings</h3>
+                            <p>Configure roles, permissions, and academic sessions.</p>
+                        </div>
+                    </div>
+                    <!-- Card 3: Reports -->
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                        <div class="card-content">
+                            <h3>Generate Reports</h3>
+                            <p>View analytics on attendance, grades, and finances.</p>
+                        </div>
+                    </div>
+                    <!-- Card 4: Database Backup -->
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="fa-solid fa-database"></i></div>
+                        <div class="card-content">
+                            <h3>Database Backup</h3>
+                            <p>Create and manage system data backups.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

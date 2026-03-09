@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings - Admin Portal</title>
+    <link rel="stylesheet" href="style3.css">
+    <script src="script3.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-user-shield"></i>
+            <h3>Admin Panel</h3>
+        </div>
+        <div class="user-details">
+            <div class="user-info">
+                <p id="user-name">Name: Admin User</p>
+            </div>
+            <div class="user-options">
+                <i class="fa-solid fa-ellipsis-vertical options-icon"></i>
+                <div class="options-menu hidden">
+                    <a href="../profile.html">Profile</a>
+                    <a href="../help-support.html">Help & Support</a>
+                    <a href="../login-signup.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="admin.html"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a></li>
+            <li><a href="manage-users.html"><i class="fa-solid fa-users-cog"></i><span>Manage Users</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-bullhorn"></i><span>Global Announcements</span></a></li>
+            <li><a href="reports.html"><i class="fa-solid fa-chart-line"></i><span>System Reports</span></a></li>
+            <li class="active"><a href="system-settings.html"><i class="fa-solid fa-cogs"></i><span>Settings</span></a></li>
+        </ul>
+        <div class="nav-logout">
+            <a href="../login-signup.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <h2 id="school-name">E-Vidyalaya Administration</h2>
+            <div class="school-logo" style="background-image: url('../School Png PNG Transparent With Clear Background ID 137543 _ TopPNG.jpg'); background-size: cover; background-position: center;"></div>
+        </div>
+
+        <main id="main-content">
+            <header class="main-header">
+                <h1>System Settings</h1>
+            </header>
+            <hr>
+            <section class="page-content">
+                <div style="max-width: 600px;">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-dark);">School Name</label>
+                        <input type="text" value="E-Vidyalaya High School" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-dark);">Current Academic Session</label>
+                        <select style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <option>2022-2023</option>
+                            <option selected>2023-2024</option>
+                            <option>2024-2025</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; background: white; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Maintenance Mode</h4>
+                            <p style="font-size: 13px; color: #666;">Prevent users from logging in during updates.</p>
+                        </div>
+                        <input type="checkbox" style="transform: scale(1.5);">
+                    </div>
+
+                    <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; background: white; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Allow New Registrations</h4>
+                            <p style="font-size: 13px; color: #666;">Enable or disable public signup forms.</p>
+                        </div>
+                        <input type="checkbox" checked style="transform: scale(1.5);">
+                    </div>
+
+                    <button id="save-settings-btn" class="btn" style="background: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px;">Save Changes</button>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

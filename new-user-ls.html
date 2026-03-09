@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Login Page</title>
+</head>
+<body>
+
+    <div id="Select_your_organization_type">
+        <h1>Select your organization type</h1>
+        <p class="subtitle">Choose the category that best fits your institution to get started.</p>
+        <div class="org-options">
+            <div class="org-choice coaching">
+                <img src="path/to/your/coaching-image.png" alt="Coaching Center">
+                <h2>Coaching</h2>
+            </div>
+            <div class="org-choice school">
+                <img src="School Png PNG Transparent With Clear Background ID 137543 _ TopPNG.jpg" alt="School">
+                <h2>School</h2>
+            </div>
+            <div class="org-choice uc">
+                <img src="path/to/your/university-image.png" alt="University or College">
+                <h2>University/College</h2>
+            </div>
+        </div>
+    </div>
+    <div class="main_wrapper hidden">
+    <div class="login_wrapper">
+        <div class="login-branding">
+            <!-- You can place your logo here -->
+            <i class="fa-solid fa-graduation-cap logo-icon"></i>
+            <h2>E-Vidyalaya</h2>
+            <p>Your digital campus companion.</p>
+        </div>
+        <div class="form-container">
+            <h1>Organization Signup</h1>
+            <form action="">
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="school_name" id="school_name" placeholder="Enter your School name">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="school_email" name="email" id="school_email" placeholder="Enter your School Email">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="school_password" id="school_password" placeholder="Enter your Password">
+                    <i class="fa-solid fa-eye-slash toggle-password"></i>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" name="school_phone" id="school_phone" placeholder="Enter your school contact no">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-graduation-cap logo-icon"></i>
+                    <select class="school_type" id="school_type" name="school_type">
+                        <option value="" disabled selected>Select your School Type</option>
+                        <option value="Pre-Primary">Pre-Primary</option>
+                        <option value="Primary">Primary</option>
+                        <option value="Senior_secondary">Senior Secondary</option>
+                    </select>
+                </div>
+                <button type="submit" class="btns">Signup</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <script src="script1.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Attendance - Student Portal</title>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-profile">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h3>E-Vidyalaya</h3>
+        </div>
+        <div class="user-details">
+            <div class="user-info-text">
+                <p id="user-name">Name: </p>
+                <p id="user-class">Class: 10th A</p>
+                <p id="user-sec">Section: B</p>
+                <p id="user-roll">Roll No: 25</p>
+            </div>
+            <div class="user-options">
+                <i class="fa-solid fa-circle-user options-icon"></i>
+                <div class="options-menu hidden">
+                    <a href="../profile.html">Profile</a>
+                    <a href="../help-support.html">Help & Support</a>
+                    <a href="../login-signup.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="student.html"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+            <li class="active"><a href="Attendance.html"><i class="fa-solid fa-user-check"></i><span>Attendance</span></a></li>
+            <li><a href="academic-records.html"><i class="fa-solid fa-book"></i><span>Academic Records</span></a></li>
+            <li><a href="assignments.html"><i class="fa-solid fa-pen-to-square"></i><span>Assignments</span></a></li>
+            <li><a href="Announcement.html"><i class="fa-solid fa-bullhorn"></i><span>Announcement</span></a></li>
+            <li><a href="Fees.html"><i class="fa-solid fa-money-bill"></i><span>Fees</span></a></li>
+            <li><a href="Online class.html"><i class="fa-solid fa-video"></i><span>Online Class</span></a></li>
+            <li><a href="chat.html"><i class="fa-solid fa-comment"></i><span>Chat</span></a></li>
+            <li><a href="timetable.html"><i class="fa-solid fa-calendar-days"></i><span>Timetable</span></a></li>
+        </ul>
+        <div class="nav-logout">
+            <a href="../help-support.html"><i class="fa-solid fa-circle-question"></i><span>Help & Support</span></a>
+            <a href="../login-signup.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="top-bar">
+            <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <div class="school-info">
+                <h2 id="school-name">Your School Name</h2>
+                <div class="school-logo"></div>
+            </div>
+        </div>
+
+        <main id="main-content">
+            <header class="main-header">
+                <h1>Attendance Record</h1>
+            </header>
+
+            <section class="page-content attendance-dashboard">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="nav-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+                        <h2>December 2023</h2>
+                        <button class="nav-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="day-name">Sun</div>
+                        <div class="day-name">Mon</div>
+                        <div class="day-name">Tue</div>
+                        <div class="day-name">Wed</div>
+                        <div class="day-name">Thu</div>
+                        <div class="day-name">Fri</div>
+                        <div class="day-name">Sat</div>
+                        <!-- Days of the month -->
+                        <div class="day other-month">26</div>
+                        <div class="day other-month">27</div>
+                        <div class="day other-month">28</div>
+                        <div class="day other-month">29</div>
+                        <div class="day other-month">30</div>
+                        <div class="day present"><span class="day-number">1</span><i class="fa-solid fa-check"></i></div>
+                        <div class="day present"><span class="day-number">2</span><i class="fa-solid fa-check"></i></div>
+                        <div class="day holiday"><span class="day-number">3</span></div>
+                        <div class="day absent"><span class="day-number">4</span><i class="fa-solid fa-times"></i></div>
+                        <div class="day half-day"><span class="day-number">5</span><i class="fa-solid fa-circle-half-stroke"></i></div>
+                        <div class="day present"><span class="day-number">6</span><i class="fa-solid fa-check"></i></div>
+                        <div class="day present"><span class="day-number">7</span><i class="fa-solid fa-check"></i></div>
+                        <div class="day present"><span class="day-number">8</span><i class="fa-solid fa-check"></i></div>
+                        <div class="day present"><span class="day-number">9</span><i class="fa-solid fa-check"></i></div>
+                        <div class="day holiday"><span class="day-number">10</span></div>
+                        <!-- Add more days as needed -->
+                    </div>
+                </div>
+
+                <div class="summary-container">
+                    <div class="summary-card">
+                        <h3>This Month's Record</h3>
+                        <div class="summary-item">
+                            <span>Present</span>
+                            <span class="value present-value">20 Days (90.9%)</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Half-day</span>
+                            <span class="value half-day-value">1 Day (4.5%)</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Absent</span>
+                            <span class="value absent-value">1 Day (4.5%)</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <h3>This Year's Record</h3>
+                        <div class="summary-item">
+                            <span>Total Working Days</span>
+                            <span class="value">220</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Holidays</span>
+                            <span class="value">25</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Events Planned</span>
+                            <span class="value">8</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
