@@ -121,6 +121,325 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function setupGradebookPage() {
+        const pageContent = document.querySelector('.gradebook-controls');
+        if (!pageContent) return; // Only run on gradebook page
+    
+        const loadBtn = document.getElementById('load-grades-btn');
+        const saveBtn = document.querySelector('.save-grades-btn');
+        const maxMarksInput = document.getElementById('max-marks');
+        const gradeSheetContent = document.getElementById('grade-sheet-content');
+        const importBtn = document.getElementById('import-grades-btn');
+        const gradesFileInput = document.getElementById('grades-file-input');
+    
+        const avgDisplay = document.getElementById('class-average');
+        const highestDisplay = document.getElementById('highest-score');
+        const lowestDisplay = document.getElementById('lowest-score');
+    
+        const updateGradeStats = () => {
+            const marksInputs = document.querySelectorAll('.marks-input');
+            const maxMarks = parseInt(maxMarksInput.value, 10) || 100;
+            let totalMarks = 0;
+            let validEntries = 0;
+            let scores = [];
+    
+            marksInputs.forEach(input => {
+                const valueStr = input.value;
+                if (valueStr === '') {
+                    input.classList.remove('invalid');
+                    return; // Skip empty inputs
+                }
+    
+                const value = parseInt(valueStr, 10);
+                if (isNaN(value) || value < 0 || value > maxMarks) {
+                    input.classList.add('invalid');
+                } else {
+                    input.classList.remove('invalid');
+                    totalMarks += value;
+                    validEntries++;
+                    scores.push(value);
+                }
+            });
+    
+            if (validEntries > 0) {
+                avgDisplay.textContent = (totalMarks / validEntries).toFixed(1);
+                highestDisplay.textContent = Math.max(...scores);
+                lowestDisplay.textContent = Math.min(...scores);
+            } else {
+                avgDisplay.textContent = '-';
+                highestDisplay.textContent = '-';
+                lowestDisplay.textContent = '-';
+            }
+        };
+
+        if (importBtn && gradesFileInput) {
+            importBtn.addEventListener('click', () => {
+                gradesFileInput.click(); // Trigger the hidden file input
+            });
+    
+            gradesFileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    alert(`File "${file.name}" selected.\n\nIn a real application, this file would be processed to populate the grade sheet. This requires a library to parse Excel/CSV files.`);
+                    // To allow selecting the same file again
+                    event.target.value = ''; 
+                }
+            });
+        }
+    
+        loadBtn.addEventListener('click', () => {
+            alert('Loading grade sheet...');
+            gradeSheetContent.classList.remove('hidden');
+            
+            document.querySelectorAll('.marks-input').forEach(input => {
+                input.addEventListener('input', updateGradeStats);
+            });
+            maxMarksInput.addEventListener('input', updateGradeStats);
+            updateGradeStats(); // Initial calculation for pre-filled values
+        });
+    
+        saveBtn.addEventListener('click', () => {
+            if (document.querySelectorAll('.marks-input.invalid').length > 0) {
+                alert('Please correct the invalid marks (highlighted in red) before saving.');
+                return;
+            }
+            alert('Grades have been saved successfully!');
+        });
+    }
+
+    //================================================
+    // PAGE-SPECIFIC LOGIC: Teacher's Own Attendance Page
+    //================================================
+    function setupTeacherAttendancePage() {
+        // --- Get Page Elements ---
+        const page = document.querySelector('.teacher-attendance-page');
+        if (!page) return; // Only run on the correct page
+
+        // Modal elements
+        const markAttendanceBtn = document.getElementById('mark-attendance-btn');
+        const modalOverlay = document.getElementById('mark-attendance-modal');
+        const closeModalBtn = modalOverlay.querySelector('.modal-close-btn');
+        const submitBtn = document.getElementById('submit-teacher-attendance');
+
+        // Form elements
+        const teacherNameDisplay = document.getElementById('teacher-name-display');
+        const attendanceHistoryTableBody = document.querySelector('.attendance-history-table tbody');
+
+        // Main page calendar elements
+        const calendarContainer = document.querySelector('.calendar-grid');
+        const monthYearDisplay = document.getElementById('calendar-month-year');
+        const prevMonthBtn = document.getElementById('prev-month-btn');
+        const nextMonthBtn = document.getElementById('next-month-btn');
+
+        // Modal calendar elements
+        const modalCalendarContainer = document.getElementById('modal-calendar-container');
+        const displaySelectedDate = document.getElementById('display-selected-date');
+        const modalMonthYear = document.getElementById('modal-month-year');
+        const modalPrevBtn = document.getElementById('modal-prev-month-btn');
+        const modalNextBtn = document.getElementById('modal-next-month-btn');
+        const modalCalendarGrid = modalCalendarContainer.querySelector('.mini-calendar-grid');
+        const hiddenDateInput = document.getElementById('attendance-date'); // Repurposed as hidden input
+        const remarksGroup = document.getElementById('remarks-group');
+        const remarksInput = document.getElementById('attendance-remarks');
+        const statusRadios = modalOverlay.querySelectorAll('input[name="teacher-status"]');
+
+
+        let mainCalendarDate = new Date();
+        let modalCalendarDate = new Date();
+        let selectedDate = new Date();
+
+        // --- Modal Open/Close Logic ---
+        markAttendanceBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('hidden');
+            // Reset form on open
+            remarksGroup.style.display = 'none';
+            remarksInput.value = '';
+            document.querySelector('input[name="teacher-status"][value="P"]').checked = true;
+
+            modalCalendarDate = new Date();
+            selectedDate = new Date();
+            generateModalCalendar(modalCalendarDate);
+        });
+
+        closeModalBtn.addEventListener('click', () => modalOverlay.classList.add('hidden'));
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) modalOverlay.classList.add('hidden');
+        });
+
+        // Show/hide remarks based on status
+        statusRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'L' || radio.value === 'A') {
+                    remarksGroup.style.display = 'flex';
+                } else {
+                    remarksGroup.style.display = 'none';
+                }
+            });
+        });
+        // --- Form & Submission Logic ---
+        const username = localStorage.getItem('username');
+        if (username) {
+            teacherNameDisplay.textContent = username;
+        }
+
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const selectedDateValue = hiddenDateInput.value;
+            const selectedStatusElement = document.querySelector('input[name="teacher-status"]:checked');
+            const selectedStatus = selectedStatusElement ? selectedStatusElement.value : null;
+            const remarks = remarksInput.value;
+
+            if (!selectedDateValue) {
+                alert('Please select a date from the calendar.');
+                return;
+            }
+
+            alert(`Attendance submitted for ${username} on ${selectedDateValue}: ${selectedStatus}. Remarks: ${remarks || 'N/A'}`);
+            modalOverlay.classList.add('hidden');
+
+            const statusText = selectedStatus === 'P' ? 'Present' : selectedStatus === 'A' ? 'Absent' : 'Leave';
+            const statusClass = selectedStatus === 'P' ? 'status-present' : selectedStatus === 'A' ? 'status-absent' : 'status-leave';
+            const newRow = `<tr><td>${selectedDateValue}</td><td><span class="status-tag ${statusClass}">${statusText}</span></td><td>${remarks || '-'}</td></tr>`;
+            attendanceHistoryTableBody.prepend(document.createRange().createContextualFragment(newRow));
+
+            // In a real app, you'd refetch data and then call this.
+            generateCalendar(mainCalendarDate);
+        });
+
+        // --- Modal Calendar Generation ---
+        function generateModalCalendar(date) {
+            if (!modalCalendarGrid || !modalMonthYear) return;
+
+            modalCalendarGrid.innerHTML = '';
+            const month = date.getMonth();
+            const year = date.getFullYear();
+            const today = new Date();
+
+            modalMonthYear.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+
+            const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+            dayNames.forEach(day => {
+                const dayNameEl = document.createElement('div');
+                dayNameEl.className = 'mini-calendar-day-name';
+                dayNameEl.textContent = day;
+                modalCalendarGrid.appendChild(dayNameEl);
+            });
+
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const blankDate = document.createElement('div');
+                blankDate.className = 'mini-calendar-date other-month';
+                modalCalendarGrid.appendChild(blankDate);
+            }
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateEl = document.createElement('div');
+                dateEl.className = 'mini-calendar-date';
+                dateEl.textContent = i;
+
+                dateEl.addEventListener('click', () => {
+                    if (dateEl.classList.contains('other-month')) return;
+                    selectedDate = new Date(year, month, i);
+                    const allDates = modalCalendarGrid.querySelectorAll('.mini-calendar-date');
+                    allDates.forEach(d => d.classList.remove('selected'));
+                    dateEl.classList.add('selected');
+
+                    const yyyy = selectedDate.getFullYear();
+                    const mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
+                    const dd = String(selectedDate.getDate()).padStart(2, '0');
+                    hiddenDateInput.value = `${yyyy}-${mm}-${dd}`;
+                    displaySelectedDate.textContent = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                });
+
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dateEl.classList.add('today');
+                }
+                if (i === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) {
+                    dateEl.classList.add('selected');
+                    const yyyy = selectedDate.getFullYear();
+                    const mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
+                    const dd = String(selectedDate.getDate()).padStart(2, '0');
+                    hiddenDateInput.value = `${yyyy}-${mm}-${dd}`;
+                    displaySelectedDate.textContent = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                }
+                modalCalendarGrid.appendChild(dateEl);
+            }
+        }
+
+        modalPrevBtn.addEventListener('click', () => {
+            modalCalendarDate.setMonth(modalCalendarDate.getMonth() - 1);
+            generateModalCalendar(modalCalendarDate);
+        });
+
+        modalNextBtn.addEventListener('click', () => {
+            modalCalendarDate.setMonth(modalCalendarDate.getMonth() + 1);
+            generateModalCalendar(modalCalendarDate);
+        });
+
+        // --- Main Calendar Generation Logic ---
+        function generateCalendar(date) {
+            if (!calendarContainer || !monthYearDisplay) return;
+
+            calendarContainer.innerHTML = ''; // Clear previous calendar
+            const month = date.getMonth();
+            const year = date.getFullYear();
+            const today = new Date();
+
+            monthYearDisplay.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayNames.forEach(day => {
+                const dayNameEl = document.createElement('div');
+                dayNameEl.className = 'calendar-day-name';
+                dayNameEl.textContent = day;
+                calendarContainer.appendChild(dayNameEl);
+            });
+
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const blankDate = document.createElement('div');
+                blankDate.className = 'calendar-date other-month';
+                calendarContainer.appendChild(blankDate);
+            }
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateEl = document.createElement('div');
+                dateEl.className = 'calendar-date';
+                dateEl.textContent = i;
+
+                // Dummy logic for styling. In a real app, you'd check against saved attendance data.
+                const dayOfWeek = new Date(year, month, i).getDay();
+                if (dayOfWeek === 0) dateEl.classList.add('holiday');
+                else if (i % 9 === 0) dateEl.classList.add('absent');
+                else if (i % 7 === 0) dateEl.classList.add('leave');
+                else if (i < 21) dateEl.classList.add('present');
+
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dateEl.classList.add('today');
+                }
+
+                calendarContainer.appendChild(dateEl);
+            }
+        }
+
+        if(prevMonthBtn) prevMonthBtn.addEventListener('click', () => {
+            mainCalendarDate.setMonth(mainCalendarDate.getMonth() - 1);
+            generateCalendar(mainCalendarDate);
+        });
+
+        if(nextMonthBtn) nextMonthBtn.addEventListener('click', () => {
+            mainCalendarDate.setMonth(mainCalendarDate.getMonth() + 1);
+            generateCalendar(mainCalendarDate);
+        });
+
+        // Initial main calendar generation
+        generateCalendar(mainCalendarDate);
+    }
+
     function setupFeesPage() {
         const feeControls = document.querySelector('.fee-controls');
         if (!feeControls) return; // Only run on fees page
@@ -305,6 +624,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setupOptionsMenu();
     setupResponsiveNavbar();
     setupMyClassesPage();
+    setupTeacherAttendancePage(); // New function call
+    setupGradebookPage();
     setupAnnouncementsPage();
     setupChatPage();
     setupFeesPage();

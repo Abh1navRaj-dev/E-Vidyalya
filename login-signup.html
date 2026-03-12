@@ -23,7 +23,7 @@
         <div class="form-container">
             <h1>Login</h1>
             <form action="">
-                <div class="input-group">
+                <label class="input-group" for="role_select">
                     <i class="fa-solid fa-user-tie"></i>
                     <select class="role_options" id="role_select" name="role">
                         <option value="" disabled selected>Select your Role</option>
@@ -34,22 +34,22 @@
                         <option value="Parent">Parent</option>
                         <option value="staff">Staff</option>
                     </select>
-                </div>
+                </label>
 
                 <!-- Fields for Staff (Admin, Teacher, etc.) -->
                 <div id="staff-login-fields" class="hidden">
-                    <div class="input-group">
+                    <label class="input-group" for="username">
                         <i class="fa-solid fa-user"></i>
                         <input type="text" name="username" id="username" placeholder="Enter your name">
-                    </div>
-                    <div class="input-group">
+                    </label>
+                    <label class="input-group" for="email">
                         <i class="fa-solid fa-envelope"></i>
                         <input type="email" name="email" id="email" placeholder="Enter your Email">
-                    </div>
-                    <div class="input-group">
+                    </label>
+                    <label class="input-group" for="phone">
                         <i class="fa-solid fa-phone"></i>
                         <input type="tel" name="phone" id="phone" placeholder="Enter your Phone Number">
-                    </div>
+                    </label>
                     <div class="gender-group">
                         <label>Gender:</label>
                         <input type="radio" id="gender_male" name="gender" value="male">
@@ -57,10 +57,10 @@
                         <input type="radio" id="gender_female" name="gender" value="female">
                         <label for="gender_female">Female</label>
                     </div>
-                    <div class="input-group">
+                    <label class="input-group" for="organization_name">
                         <i class="fa-solid fa-building"></i>
                         <textarea name="organization_name" id="organization_name" placeholder="Enter your Organization Name"></textarea>
-                    </div>
+                    </label>
                 </div>
 
                 <!-- Common Fields -->
@@ -69,10 +69,10 @@
                     <input type="password" name="password" id="password" placeholder="Enter your Password">
                     <i class="fa-solid fa-eye-slash toggle-password"></i>
                 </div>
-                <div class="input-group">
+                <label class="input-group" for="organization_key">
                     <i class="fa-solid fa-key"></i>
                     <input type="text" name="organization_key" id="organization_key" placeholder="Enter your Organization Key">
-                </div>
+                </label>
 
                 <div class="form-options">
                     <div class="remember-me">
@@ -100,14 +100,14 @@
         <span class="close-dev-modal">&times;</span>
         <h2><i class="fa-solid fa-user-secret"></i> Dev Access</h2>
         <form id="dev-login-form">
-            <div class="input-group">
+            <label class="input-group" for="dev_id">
                 <i class="fa-solid fa-id-badge"></i>
                 <input type="text" id="dev_id" placeholder="Dev ID">
-            </div>
-            <div class="input-group">
+            </label>
+            <label class="input-group" for="product_id">
                 <i class="fa-solid fa-box-open"></i>
                 <input type="text" id="product_id" placeholder="Product ID">
-            </div>
+            </label>
             <div class="input-group">
                 <i class="fa-solid fa-key"></i>
                 <input type="password" id="dev_pin" placeholder="Special PIN">

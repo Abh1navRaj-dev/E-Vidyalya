@@ -33,7 +33,8 @@
         <ul class="nav-menu">
             <li><a href="teacher.html"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
             <li><a href="my-classes.html"><i class="fa-solid fa-users"></i><span>My Classes</span></a></li>
-            <li><a href="attendance.html"><i class="fa-solid fa-user-check"></i><span>Attendance</span></a></li>
+            <li><a href="attendance.html"><i class="fa-solid fa-user-check"></i><span>Student Attendance</span></a></li>
+            <li><a href="my-attendance.html"><i class="fa-solid fa-calendar-check"></i><span>My Attendance</span></a></li>
             <li class="active"><a href="gradebook.html"><i class="fa-solid fa-pen-to-square"></i><span>Gradebook</span></a></li>
             <li><a href="announcements.html"><i class="fa-solid fa-bullhorn"></i><span>Announcements</span></a></li>
             <li><a href="fees.html"><i class="fa-solid fa-money-bill"></i><span>Fees</span></a></li>
@@ -74,29 +75,62 @@
                             <option>Physics - Chapter 3 Problems</option>
                         </select>
                     </div>
-                    <button class="btn-primary">Load Grade Sheet</button>
+                    <div class="control-group">
+                        <label for="max-marks">Max Marks:</label>
+                        <input type="number" id="max-marks" value="100" style="width: 100px;">
+                    </div>
+                    <div class="gradebook-actions">
+                        <button class="btn-secondary" id="import-grades-btn"><i class="fa-solid fa-file-import"></i> Import from File</button>
+                        <input type="file" id="grades-file-input" class="hidden" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                        <button class="btn-primary" id="load-grades-btn">Load Grade Sheet</button>
+                    </div>
                 </div>
 
-                <table class="gradebook-table">
-                    <thead>
-                        <tr>
-                            <th>Roll No.</th>
-                            <th>Student Name</th>
-                            <th>Marks Obtained (out of 100)</th>
-                            <th>Comments</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Aarav Sharma</td>
-                            <td><input type="number" class="marks-input" value="85"></td>
-                            <td><input type="text" class="comments-input" placeholder="Optional comments..."></td>
-                        </tr>
-                        <!-- More students -->
-                    </tbody>
-                </table>
-                <button class="btn-primary save-grades-btn">Save Grades</button>
+                <div id="grade-sheet-content" class="hidden">
+                    <div class="grade-summary-container">
+                        <div class="summary-stat-card">
+                            <h4>Class Average</h4>
+                            <p id="class-average">-</p>
+                        </div>
+                        <div class="summary-stat-card">
+                            <h4>Highest Score</h4>
+                            <p id="highest-score">-</p>
+                        </div>
+                        <div class="summary-stat-card">
+                            <h4>Lowest Score</h4>
+                            <p id="lowest-score">-</p>
+                        </div>
+                    </div>
+
+                    <table class="gradebook-table">
+                        <thead>
+                            <tr>
+                                <th>Roll No.</th>
+                                <th>Student Name</th>
+                                <th>Marks Obtained</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Aarav Sharma</td>
+                                <td><input type="number" class="marks-input" value="85" placeholder="0-100"></td>
+                                <td><input type="text" class="comments-input" value="Good effort." placeholder="Optional comments..."></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Diya Patel</td>
+                                <td><input type="number" class="marks-input" placeholder="0-100"></td>
+                                <td><input type="text" class="comments-input" placeholder="Optional comments..."></td>
+                            </tr>
+                            <!-- More students would be loaded here -->
+                        </tbody>
+                    </table>
+                    <div class="form-actions-footer">
+                        <button class="btn-primary save-grades-btn">Save Grades</button>
+                    </div>
+                </div>
             </section>
         </main>
     </div>

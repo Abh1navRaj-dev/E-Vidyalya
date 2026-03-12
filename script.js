@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     //================================================================
     // UTILITY: Show/Hide Password Fields
     //================================================================
     function setupPasswordToggles() {
         const toggleIcons = document.querySelectorAll('.toggle-password');
         toggleIcons.forEach(icon => {
-            icon.addEventListener('click', function() {
-                const input = this.parentElement.querySelector('input');
+            // Use 'mousedown' instead of 'click' to prevent focus issues when the icon is inside a label.
+            icon.addEventListener('mousedown', function(e) {
+                e.preventDefault(); // Stop the browser from focusing the input, which can be jarring.
+
+                // Use .closest() to find the parent .input-group. This is more robust
+                // than .parentElement if the icon is nested inside another element.
+                const input = this.closest('.input-group')?.querySelector('input[type="password"], input[type="text"]');
+
+                if (!input) return;
+
+                // Toggle the input type and the icon
                 if (input.type === 'password') {
                     input.type = 'text';
                     this.classList.remove('fa-eye-slash');
@@ -20,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-
     //================================================================
     // LOGIC FOR: login-signup.html
     //================================================================
@@ -399,7 +406,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     setupResponsiveNavbar(); // Run this for the dev dashboard
-    setupPasswordToggles(); // Initialize password toggles on all pages
 
     //================================================================
     // LOGIC FOR: profile.html
@@ -572,4 +578,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     setupHelpPage(); // Run help page logic
+    setupPasswordToggles(); // Initialize password toggle icons
 });

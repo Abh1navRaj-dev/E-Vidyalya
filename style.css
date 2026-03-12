@@ -93,6 +93,8 @@ body{
 .input-group {
     position: relative;
     margin-bottom: 12px;
+    display: block; /* Ensures <label> behaves like a <div> */
+    cursor: text;   /* Indicates the whole area is for text input */
 }
 
 .input-group i {
@@ -108,8 +110,8 @@ body{
 .input-group input,
 .input-group textarea,
 .input-group select {
-    width: 100%;
-    padding: 10px 15px 10px 45px; /* Make space for the icon on the left */
+    width: 100%;    
+    padding: 10px 45px; /* Space for icons on both left and right */
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
     font-size: 15px;
@@ -133,11 +135,13 @@ body{
 /* Eye icon for password toggle */
 .input-group .toggle-password {
     position: absolute;
+    left: auto; /* IMPORTANT: Unset the left positioning from the general icon rule */
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: #aaa;
     cursor: pointer;
+    padding: 5px; /* Increase clickable area */
     z-index: 2;
 }
 
@@ -718,6 +722,12 @@ body.dev-dashboard-body {
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
+}
+
+/* For profile inputs that have a toggle icon, add space for it.
+   This uses :has() to check for the presence of .toggle-password and is a more robust fix. */
+.profile-form .input-group:has(.toggle-password) input {
+    padding-right: 45px;
 }
 
 @media (max-width: 768px) {

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     //================================================
     // PERSONALIZATION: Greet user and set details
     //================================================
@@ -66,7 +65,54 @@ document.addEventListener('DOMContentLoaded', function() {
     //================================================
     function setupSubjectTabs() {
         const subjectTabs = document.querySelectorAll('.subject-tabs .tab');
-        if (!subjectTabs.length) return; // Only run if tabs exist on the page
+        const recordsTableBody = document.querySelector('.records-table tbody');
+        if (!subjectTabs.length || !recordsTableBody) return; // Only run if elements exist
+
+        // --- Dummy Data for Academic Records ---
+        const academicData = {
+            math: [
+                { exam: 'Unit Test 1', marks: '85 / 100', percentage: '85%', rank: '3rd' },
+                { exam: 'Mid-Term Exam', marks: '78 / 100', percentage: '78%', rank: '5th' }
+            ],
+            physics: [
+                { exam: 'Unit Test 1', marks: '92 / 100', percentage: '92%', rank: '1st' },
+                { exam: 'Practical Exam', marks: '45 / 50', percentage: '90%', rank: '2nd' }
+            ],
+            chemistry: [
+                { exam: 'Unit Test 1', marks: '88 / 100', percentage: '88%', rank: '2nd' }
+            ],
+            english: [
+                { exam: 'Unit Test 1', marks: '75 / 100', percentage: '75%', rank: '8th' },
+                { exam: 'Orals', marks: '22 / 25', percentage: '88%', rank: '4th' }
+            ]
+        };
+
+        function renderRecords(subject) {
+            // Clear existing rows
+            recordsTableBody.innerHTML = '';
+
+            const records = academicData[subject] || [];
+
+            if (records.length === 0) {
+                recordsTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No records found for this subject.</td></tr>`;
+                return;
+            }
+
+            records.forEach(record => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.exam}</td>
+                    <td>${record.marks}</td>
+                    <td>${record.percentage}</td>
+                    <td>${record.rank}</td>
+                    <td class="download-links">
+                        <a href="#" title="Answer Key"><i class="fa-solid fa-key"></i></a>
+                        <a href="#" title="Question Paper"><i class="fa-solid fa-file-lines"></i></a>
+                    </td>
+                `;
+                recordsTableBody.appendChild(row);
+            });
+        }
 
         subjectTabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -75,11 +121,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add active class to the clicked tab
                 tab.classList.add('active');
 
-                // TODO: In a real application, you would fetch and display
-                // the data for the selected subject here.
-                console.log(`Switched to ${tab.dataset.subject} tab.`);
+                const subject = tab.dataset.subject;
+                renderRecords(subject);
             });
         });
+
+        // Initial render for the default active tab
+        const initialSubject = document.querySelector('.subject-tabs .tab.active').dataset.subject;
+        renderRecords(initialSubject);
     }
 
     //================================================
