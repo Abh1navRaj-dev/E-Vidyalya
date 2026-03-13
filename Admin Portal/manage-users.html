@@ -12,7 +12,7 @@
     <nav id="navbar">
         <div class="nav-profile">
             <i class="fa-solid fa-user-shield"></i>
-            <h3>Admin Panel</h3>
+            <h3>E-Vidyalaya</h3>
         </div>
         <div class="user-details">
             <div class="user-info">
@@ -49,7 +49,7 @@
         <main id="main-content">
             <header class="main-header">
                 <h1>User Management</h1>
-                <button id="add-user-btn" class="btn" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-left: auto;">+ Add New User</button>
+                <button id="add-user-btn" class="btn btn-primary" style="margin-left: auto;">+ Add New User</button>
             </header>
             <hr>
             <section class="page-content">
@@ -58,48 +58,63 @@
                         <i class="fa-solid fa-search"></i>
                         <input type="text" id="user-search-input" placeholder="Search by name, role, or email...">
                     </div>
+                    <div class="filter-group">
+                        <label for="role-filter">Role:</label>
+                        <select id="role-filter">
+                            <option value="all">All Roles</option>
+                            <option value="Student">Student</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Staff">Staff</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="active">Active</button>
+                        <button class="filter-btn" data-filter="on-leave">On Leave</button>
+                    </div>
                 </div>
 
                 <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                    <table class="data-table">
                         <thead>
-                            <tr style="background: #f8f9fa; text-align: left; color: var(--text-dark);">
-                                <th style="padding: 15px; border-bottom: 2px solid #dee2e6;">Name</th>
-                                <th style="padding: 15px; border-bottom: 2px solid #dee2e6;">Role</th>
-                                <th style="padding: 15px; border-bottom: 2px solid #dee2e6;">Email</th>
-                                <th style="padding: 15px; border-bottom: 2px solid #dee2e6;">Status</th>
-                                <th style="padding: 15px; border-bottom: 2px solid #dee2e6;">Actions</th>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">Rohan Verma</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">Student</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">rohan@example.com</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;"><span style="background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Active</span></td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">
-                                    <button style="color: #007bff; background: none; border: none; cursor: pointer; margin-right: 10px;"><i class="fa-solid fa-pen"></i></button>
-                                    <button style="color: #dc3545; background: none; border: none; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                            <tr data-role="Student" data-status="active">
+                                <td>Rohan Verma</td>
+                                <td>Student</td>
+                                <td>rohan@example.com</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>
+                                    <button class="action-btn edit-btn"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="action-btn delete-btn"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">Mrs. Gupta</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">Teacher</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">gupta@evidyalaya.com</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;"><span style="background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Active</span></td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">
-                                    <button style="color: #007bff; background: none; border: none; cursor: pointer; margin-right: 10px;"><i class="fa-solid fa-pen"></i></button>
-                                    <button style="color: #dc3545; background: none; border: none; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                            <tr data-role="Teacher" data-status="active">
+                                <td>Mrs. Gupta</td>
+                                <td>Teacher</td>
+                                <td>gupta@evidyalaya.com</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>
+                                    <button class="action-btn edit-btn"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="action-btn delete-btn"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">Mr. Kumar</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">Staff</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">kumar@evidyalaya.com</td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;"><span style="background: #fff3cd; color: #856404; padding: 4px 8px; border-radius: 4px; font-size: 12px;">On Leave</span></td>
-                                <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">
-                                    <button style="color: #007bff; background: none; border: none; cursor: pointer; margin-right: 10px;"><i class="fa-solid fa-pen"></i></button>
-                                    <button style="color: #dc3545; background: none; border: none; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                            <tr data-role="Staff" data-status="on-leave">
+                                <td>Mr. Kumar</td>
+                                <td>Staff</td>
+                                <td>kumar@evidyalaya.com</td>
+                                <td><span class="status-badge status-on-leave">On Leave</span></td>
+                                <td>
+                                    <button class="action-btn edit-btn"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="action-btn delete-btn"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -131,7 +146,7 @@
                     <label>Email</label>
                     <input type="email" id="new-user-email" required placeholder="e.g. john@example.com">
                 </div>
-                <button type="submit" class="btn" style="background: var(--primary-color); color: white; width: 100%; margin-top: 10px;">Add User</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Add User</button>
             </form>
         </div>
     </div>

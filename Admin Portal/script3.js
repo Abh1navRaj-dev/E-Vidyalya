@@ -100,47 +100,70 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     //================================================
-    // PAGE-SPECIFIC: Manage Users Table Search
+    // PAGE-SPECIFIC: Manage Users Page
     //================================================
-    function setupUserSearch() {
+    function setupManageUsersPage() {
+        // --- SELECTORS ---
         const searchInput = document.getElementById('user-search-input');
-        // Only run this function if the search input exists on the page
-        if (!searchInput) return;
-
+        const roleFilter = document.getElementById('role-filter');
+        const pageControls = document.querySelector('.page-controls');
         const tableBody = document.querySelector('table tbody');
-        if (!tableBody) return;
-        
-        const tableRows = tableBody.querySelectorAll('tr');
-
-        searchInput.addEventListener('keyup', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-
-            tableRows.forEach(row => {
-                // Get all text content from the row and convert to lower case
-                const rowText = row.textContent.toLowerCase();
-
-                // If the row's text includes the search term, show it, otherwise hide it
-                row.style.display = rowText.includes(searchTerm) ? '' : 'none';
-            });
-        });
-    }
-
-    //================================================
-    // PAGE-SPECIFIC: Manage Users Actions
-    //================================================
-    function setupUserManagement() {
         const addUserBtn = document.getElementById('add-user-btn');
         const modal = document.getElementById('add-user-modal');
         const closeModal = document.querySelector('.close-modal');
         const addUserForm = document.getElementById('add-user-form');
-        const tableBody = document.querySelector('table tbody');
+
+        // Only run if core elements exist
+        if (!tableBody || !pageControls) return;
+
+        const statusButtons = pageControls.querySelectorAll('.filter-btn');
+
+        // --- FILTERING LOGIC ---
+        function applyAllFilters() {
+            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            const roleValue = roleFilter ? roleFilter.value.toLowerCase() : 'all';
+            const activeStatusBtn = pageControls.querySelector('.filter-btn.active');
+            const statusValue = activeStatusBtn ? activeStatusBtn.dataset.filter.toLowerCase() : 'all';
+
+            const tableRows = tableBody.querySelectorAll('tr');
+
+            tableRows.forEach(row => {
+                const rowText = row.textContent.toLowerCase();
+                const rowRole = (row.dataset.role || '').toLowerCase();
+                const rowStatus = (row.dataset.status || '').toLowerCase();
+
+                const searchMatch = rowText.includes(searchTerm);
+                const roleMatch = (roleValue === 'all' || rowRole === roleValue);
+                const statusMatch = (statusValue === 'all' || rowStatus === statusValue);
+
+                if (searchMatch && roleMatch && statusMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // --- EVENT LISTENERS for filters ---
+        if (searchInput) searchInput.addEventListener('keyup', applyAllFilters);
+        if (roleFilter) roleFilter.addEventListener('change', applyAllFilters);
+
+        statusButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                statusButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                applyAllFilters();
+            });
+        });
+
+        // --- USER MANAGEMENT ACTIONS ---
 
         // Open Modal
         if (addUserBtn && modal) {
             addUserBtn.addEventListener('click', () => modal.classList.remove('hidden'));
         }
 
-        // Close Modal
+        // Close Modal logic
         if (closeModal && modal) {
             closeModal.addEventListener('click', () => modal.classList.add('hidden'));
             window.addEventListener('click', (e) => {
@@ -148,44 +171,48 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Handle Form Submit
-        if (addUserForm && tableBody) {
+        // Handle Add User Form Submit
+        if (addUserForm) {
             addUserForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const name = document.getElementById('new-user-name').value;
                 const role = document.getElementById('new-user-role').value;
                 const email = document.getElementById('new-user-email').value;
 
-                // Create new row
+                // Create new row element
                 const newRow = document.createElement('tr');
+                newRow.dataset.role = role;
+                newRow.dataset.status = 'active';
                 newRow.innerHTML = `
-                    <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">${name}</td>
-                    <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">${role}</td>
-                    <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">${email}</td>
-                    <td style="padding: 15px; border-bottom: 1px solid #dee2e6;"><span style="background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Active</span></td>
-                    <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">
-                        <button style="color: #007bff; background: none; border: none; cursor: pointer; margin-right: 10px;"><i class="fa-solid fa-pen"></i></button>
-                        <button class="delete-btn" style="color: #dc3545; background: none; border: none; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                    <td>${name}</td>
+                    <td>${role}</td>
+                    <td>${email}</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td>
+                        <button class="action-btn edit-btn"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-btn delete-btn"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 `;
 
                 tableBody.appendChild(newRow);
                 modal.classList.add('hidden');
                 addUserForm.reset();
+
+                // Re-apply filters to correctly show or hide the new user
+                applyAllFilters();
+
                 alert(`${name} has been added successfully!`);
             });
         }
 
         // Handle Delete Buttons (Event Delegation)
-        if (tableBody) {
-            tableBody.addEventListener('click', (e) => {
-                if (e.target.closest('.fa-trash')) {
-                    if (confirm('Are you sure you want to remove this user?')) {
-                        e.target.closest('tr').remove();
-                    }
+        tableBody.addEventListener('click', (e) => {
+            if (e.target.closest('.fa-trash')) {
+                if (confirm('Are you sure you want to remove this user?')) {
+                    e.target.closest('tr').remove();
                 }
-            });
-        }
+            }
+        });
     }
 
     //================================================
@@ -223,7 +250,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupOptionsMenu();
     setupResponsiveNavbar();
     setupDashboardCards();
-    setupUserSearch();
-    setupUserManagement();
+    setupManageUsersPage();
     setupOtherPages();
 });

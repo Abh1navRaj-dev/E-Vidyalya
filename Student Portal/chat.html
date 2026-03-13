@@ -66,6 +66,7 @@
                             <i class="fa-solid fa-search"></i>
                             <input type="text" id="contact-search-input" placeholder="Search contacts...">
                         </div>
+                        <button id="create-group-btn" class="btn-primary"><i class="fa-solid fa-users"></i> Create Group</button>
                     </div>
                     <ul class="contact-list">
                         <!-- Contacts will be dynamically inserted here by script1.js -->
@@ -92,7 +93,7 @@
                                 <button id="chat-call-btn" class="chat-action-btn" title="Start a call">
                                     <i class="fa-solid fa-phone"></i>
                                 </button>
-                                <button class="chat-action-btn" title="More options">
+                                <button id="chat-more-options-btn" class="chat-action-btn" title="More options">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                             </div>
@@ -126,6 +127,76 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- Create Group Modal -->
+    <div id="create-group-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="modal-close-btn">&times;</span>
+            <h2>Create New Group</h2>
+            <form id="create-group-form">
+                <div class="form-group">
+                    <label>Group Name</label>
+                    <input type="text" id="group-name-input" required placeholder="e.g., Study Group, Project Team">
+                </div>
+                <div class="form-group">
+                    <label>Select Participants</label>
+                    <div id="participants-list" class="participants-list">
+                        <!-- Participants will be populated by JS -->
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Create Group</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Participant Modal -->
+    <div id="add-participant-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="modal-close-btn">&times;</span>
+            <h2>Add Participants</h2>
+            <form id="add-participant-form">
+                <div class="form-group">
+                    <label>Select Contacts</label>
+                    <div id="add-participants-list" class="participants-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Add Selected</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Group Info Panel -->
+    <div id="group-info-panel" class="info-panel hidden">
+        <div class="info-panel-header">
+            <h3>Group Info</h3>
+            <button id="close-group-info-btn" class="panel-close-btn">&times;</button>
+        </div>
+        <div class="info-panel-content">
+            <div class="group-identity">
+                <div class="group-icon-large">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="group-name-editor">
+                    <h2 id="info-panel-group-name">Group Name</h2>
+                    <button id="edit-group-name-btn" title="Edit group name"><i class="fa-solid fa-pen"></i></button>
+                </div>
+                <p id="info-panel-member-count">X members</p>
+            </div>
+            <hr>
+            <div class="participants-section">
+                <h4>Participants</h4>
+                <button id="add-participant-btn" class="btn-secondary" style="width: 100%; margin-bottom: 15px;"><i class="fa-solid fa-user-plus"></i> Add Participant</button>
+                <ul id="info-panel-participants-list" class="info-participants-list">
+                    <!-- JS will populate this -->
+                </ul>
+            </div>
+            <hr>
+            <div class="group-actions">
+                <button id="leave-group-btn" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Leave Group</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

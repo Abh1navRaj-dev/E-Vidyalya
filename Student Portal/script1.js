@@ -314,6 +314,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupChatPage() {
         const contactList = document.querySelector('.contact-list');
         if (!contactList) return; // Only run on chat page
+        const chatPlaceholder = document.getElementById('chat-placeholder');
+        const activeChatWindow = document.getElementById('active-chat-window');
+
 
         // --- Dummy Data for School Directory ---
         const schoolDirectory = [
@@ -325,6 +328,40 @@ document.addEventListener('DOMContentLoaded', function() {
             { name: 'Mr. Kumar', role: 'staff', online: true },
             { name: 'Anjali Desai', role: 'Parent', online: false },
         ];
+
+        // Helper to render participants grouped by role (Student, Staff, Parent)
+        const renderCategorizedParticipants = (container, idPrefix) => {
+            container.innerHTML = '';
+            const categories = { 'Student': [], 'Staff': [], 'Parent': [] };
+            
+            schoolDirectory.forEach(contact => {
+                const role = contact.role.toLowerCase();
+                if (role.includes('student')) categories['Student'].push(contact);
+                else if (role.includes('parent')) categories['Parent'].push(contact);
+                else categories['Staff'].push(contact); // Teachers and Principal will fall under Staff
+            });
+
+            Object.keys(categories).forEach(cat => {
+                if (categories[cat].length > 0) {
+                    const header = document.createElement('h5');
+                    header.textContent = `${cat}s`;
+                    header.style.margin = '10px 0 5px';
+                    header.style.color = '#555';
+                    header.style.borderBottom = '1px solid #eee';
+                    header.style.paddingBottom = '2px';
+                    container.appendChild(header);
+
+                    categories[cat].forEach(contact => {
+                        const uniqueId = `${idPrefix}-${contact.name.replace(/\s+/g, '-')}`;
+                        const item = document.createElement('div');
+                        item.className = 'participant-item';
+                        item.innerHTML = `<input type="checkbox" id="${uniqueId}" value="${contact.name}">
+                                          <label for="${uniqueId}">${contact.name} <small style="color:#777;">(${contact.role})</small></label>`;
+                        container.appendChild(item);
+                    });
+                }
+            });
+        };
 
         // --- Populate Contact List ---
         schoolDirectory.forEach(contact => {
@@ -346,8 +383,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // --- Handle UI Interactions ---
-        const chatPlaceholder = document.getElementById('chat-placeholder');
-        const activeChatWindow = document.getElementById('active-chat-window');
         const allContactItems = document.querySelectorAll('.contact-item');
 
         allContactItems.forEach(item => {
@@ -518,6 +553,340 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('click', () => {
             document.querySelectorAll('.message-context-menu').forEach(menu => menu.remove());
         });
+
+        // --- Group Creation Logic ---
+        const createGroupBtn = document.getElementById('create-group-btn');
+        const createGroupModal = document.getElementById('create-group-modal');
+        const closeGroupModal = createGroupModal ? createGroupModal.querySelector('.modal-close-btn') : null;
+        const createGroupForm = document.getElementById('create-group-form');
+        const participantsListContainer = document.getElementById('participants-list');
+
+        if (createGroupBtn && createGroupModal) {
+            // Open Modal
+            createGroupBtn.addEventListener('click', () => {
+                // Populate participants list
+                if (participantsListContainer) {
+                    renderCategorizedParticipants(participantsListContainer, 'create-group');
+                }
+                createGroupModal.classList.remove('hidden');
+            });
+
+            // Close Modal
+            if (closeGroupModal) {
+                closeGroupModal.addEventListener('click', () => createGroupModal.classList.add('hidden'));
+            }
+            window.addEventListener('click', (e) => {
+                if (e.target === createGroupModal) createGroupModal.classList.add('hidden');
+            });
+
+            // Handle Form Submission
+            if (createGroupForm) {
+                createGroupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const groupNameInput = document.getElementById('group-name-input');
+                    const groupName = groupNameInput.value.trim();
+                    const selectedParticipants = Array.from(participantsListContainer.querySelectorAll('input:checked'))
+                                                      .map(input => input.value);
+
+                    if (!groupName) {
+                        alert('Please enter a group name.');
+                        return;
+                    }
+
+                    if (selectedParticipants.length < 1) {
+                        alert('Please select at least one participant.');
+                        return;
+                    }
+
+                    const currentUser = localStorage.getItem('username') || 'You';
+                    selectedParticipants.unshift(currentUser);
+
+                    const groupItem = document.createElement('li');
+                    groupItem.className = 'contact-item';
+                    groupItem.dataset.name = groupName;
+                    groupItem.dataset.members = JSON.stringify(selectedParticipants); // Save members
+                    groupItem.dataset.role = `${selectedParticipants.length} members`;
+                    groupItem.dataset.type = 'group';
+
+                    groupItem.innerHTML = `
+                        <div class="profile-pic">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>${groupName}</h4>
+                            <p>${selectedParticipants.length} members</p>
+                        </div>
+                    `;
+                    contactList.prepend(groupItem);
+
+                    // Add click listener to the new group item to make it functional
+                    groupItem.addEventListener('click', () => {
+                        if (groupItem.classList.contains('active')) {
+                            groupItem.classList.remove('active');
+                            activeChatWindow.classList.add('hidden');
+                            chatPlaceholder.classList.remove('hidden');
+                        } else {
+                            chatPlaceholder.classList.add('hidden');
+                            activeChatWindow.classList.remove('hidden');
+                            document.querySelectorAll('.contact-item').forEach(i => i.classList.remove('active'));
+                            groupItem.classList.add('active');
+                            document.getElementById('chat-header-name').textContent = groupItem.dataset.name;
+                            document.getElementById('chat-header-role').textContent = groupItem.dataset.role;
+                        }
+                    });
+
+                    createGroupModal.classList.add('hidden');
+                    createGroupForm.reset();
+
+                    alert(`Group "${groupName}" created successfully!`);
+                });
+            }
+        }
+
+        // --- Group Info Panel Logic ---
+        const moreOptionsBtn = document.getElementById('chat-more-options-btn');
+        const groupInfoPanel = document.getElementById('group-info-panel');
+        const closeGroupInfoBtn = document.getElementById('close-group-info-btn');
+
+        if (moreOptionsBtn && groupInfoPanel && closeGroupInfoBtn) {
+            moreOptionsBtn.addEventListener('click', () => {
+                const activeContact = document.querySelector('.contact-item.active');
+                if (activeContact && activeContact.dataset.type === 'group') {
+                    // It's a group, show the panel
+                    document.getElementById('info-panel-group-name').textContent = activeContact.dataset.name;
+                    document.getElementById('info-panel-member-count').textContent = activeContact.dataset.role;
+                    
+                    // Dummy participants logic replacement
+                    const participantsListEl = document.getElementById('info-panel-participants-list');
+                    participantsListEl.innerHTML = ''; // Clear existing
+                    
+                    const currentUser = localStorage.getItem('username') || 'You';
+                    let groupMembers = [];
+
+                    // Try to get members from dataset
+                    if (activeContact.dataset.members) {
+                        try {
+                            groupMembers = JSON.parse(activeContact.dataset.members);
+                        } catch(e) { console.error("Error parsing members", e); }
+                    }
+                    
+                    // If no members found (e.g. dummy group), use default
+                    if (groupMembers.length === 0) {
+                        groupMembers = [currentUser, 'Rohan Verma'];
+                    }
+
+                    // Function to create participant list item
+                    const addParticipantToPanel = (name, role, canRemove = false) => {
+                        const li = document.createElement('li');
+                        li.style.display = 'flex';
+                        li.style.justifyContent = 'space-between';
+                        li.style.alignItems = 'center';
+                        
+                        const infoDiv = document.createElement('div');
+                        infoDiv.innerHTML = `<span class="participant-name" style="display:block; font-weight:500;">${name}</span>
+                                             <span class="participant-role" style="font-size:0.85em; color:#666;">${role}</span>`;
+                        li.appendChild(infoDiv);
+
+                        // For students, only the admin (creator) can remove others.
+                        // We'll assume the current user is the admin for this demo.
+                        if (canRemove) {
+                            const removeBtn = document.createElement('button');
+                            removeBtn.innerHTML = '<i class="fa-solid fa-user-minus"></i>';
+                            removeBtn.style.color = '#dc3545';
+                            removeBtn.style.background = 'none';
+                            removeBtn.style.border = 'none';
+                            removeBtn.style.cursor = 'pointer';
+                            removeBtn.title = 'Remove Participant';
+                            removeBtn.addEventListener('click', () => {
+                                li.remove();
+                                updateGroupMemberCount(-1);
+                            });
+                            li.appendChild(removeBtn);
+                        }
+                        participantsListEl.appendChild(li);
+                    };
+
+                    // Render Members
+                    groupMembers.forEach(member => {
+                        const isAdmin = (member === currentUser);
+                        const role = isAdmin ? 'Admin' : 'Member';
+                        // Admin cannot be removed, others can (if current user is admin, but simplified here)
+                        addParticipantToPanel(member, role, !isAdmin);
+                    });
+
+                    groupInfoPanel.classList.remove('hidden');
+                } else {
+                    alert('More options for individual chats are coming soon!');
+                }
+            });
+
+            // Helper to update member count text
+            function updateGroupMemberCount(change) {
+                const activeContact = document.querySelector('.contact-item.active');
+                const countDisplay = document.getElementById('info-panel-member-count');
+                if (activeContact && countDisplay) {
+                    let currentText = countDisplay.textContent;
+                    let count = parseInt(currentText) || 0;
+                    count += change;
+                    const newText = `${count} members`;
+                    countDisplay.textContent = newText;
+                    activeContact.dataset.role = newText;
+                    activeContact.querySelector('p').textContent = newText;
+                    document.getElementById('chat-header-role').textContent = newText;
+                }
+            }
+
+            // --- Leave Group Logic ---
+            const leaveGroupBtn = document.getElementById('leave-group-btn');
+            if (leaveGroupBtn) {
+                // Prevent duplicate listeners
+                const newLeaveBtn = leaveGroupBtn.cloneNode(true);
+                leaveGroupBtn.parentNode.replaceChild(newLeaveBtn, leaveGroupBtn);
+                
+                newLeaveBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to leave this group?')) {
+                        const activeContact = document.querySelector('.contact-item.active');
+                        if (activeContact) activeContact.remove();
+                        groupInfoPanel.classList.add('hidden');
+                        activeChatWindow.classList.add('hidden');
+                        chatPlaceholder.classList.remove('hidden');
+                    }
+                });
+            }
+
+            // --- Add Participant Logic ---
+            const addParticipantBtn = document.getElementById('add-participant-btn');
+            const addParticipantModal = document.getElementById('add-participant-modal');
+            const addParticipantForm = document.getElementById('add-participant-form');
+            const closeAddModalBtn = addParticipantModal ? addParticipantModal.querySelector('.modal-close-btn') : null;
+
+            if (addParticipantBtn && addParticipantModal) {
+                addParticipantBtn.addEventListener('click', () => {
+                    // Fetch the list container dynamically to ensure it exists
+                    const listContainer = document.getElementById('add-participants-list');
+                    if (listContainer) {
+                        renderCategorizedParticipants(listContainer, 'add-participant');
+                    }
+                    addParticipantModal.classList.remove('hidden');
+                });
+
+                if (closeAddModalBtn) {
+                    closeAddModalBtn.addEventListener('click', () => addParticipantModal.classList.add('hidden'));
+                }
+
+                if (addParticipantForm) {
+                    // Prevent duplicate listeners
+                    const newForm = addParticipantForm.cloneNode(true);
+                    addParticipantForm.parentNode.replaceChild(newForm, addParticipantForm);
+
+                    newForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        const listContainer = document.getElementById('add-participants-list');
+                        const selectedParticipants = Array.from(listContainer.querySelectorAll('input:checked'))
+                                                          .map(input => input.value);
+                        
+                        if (selectedParticipants.length > 0) {
+                            const participantsListEl = document.getElementById('info-panel-participants-list');
+                            const activeContact = document.querySelector('.contact-item.active');
+                            
+                            // Update dataset.members
+                            let currentMembers = [];
+                            if (activeContact && activeContact.dataset.members) {
+                                try { currentMembers = JSON.parse(activeContact.dataset.members); } catch(e){}
+                            }
+
+                            selectedParticipants.forEach(name => {
+                                // Re-implementing append logic here for safety
+                                const li = document.createElement('li');
+                                li.style.display = 'flex';
+                                li.style.justifyContent = 'space-between';
+                                li.style.alignItems = 'center';
+                                
+                                const infoDiv = document.createElement('div');
+                                infoDiv.innerHTML = `<span class="participant-name" style="display:block; font-weight:500;">${name}</span>
+                                                    <span class="participant-role" style="font-size:0.85em; color:#666;">Member</span>`;
+                                li.appendChild(infoDiv);
+
+                                // Add to data if not exists
+                                if (!currentMembers.includes(name)) {
+                                    currentMembers.push(name);
+                                }
+
+                                const removeBtn = document.createElement('button');
+                                removeBtn.innerHTML = '<i class="fa-solid fa-user-minus"></i>';
+                                removeBtn.style.color = '#dc3545';
+                                removeBtn.style.background = 'none';
+                                removeBtn.style.border = 'none';
+                                removeBtn.style.cursor = 'pointer';
+                                removeBtn.title = 'Remove Participant';
+                                removeBtn.addEventListener('click', () => {
+                                    li.remove();
+                                    updateGroupMemberCount(-1);
+                                });
+                                li.appendChild(removeBtn);
+                                participantsListEl.appendChild(li);
+                            });
+
+                            // Save updated list back to contact item
+                            if (activeContact) activeContact.dataset.members = JSON.stringify(currentMembers);
+                            
+                            updateGroupMemberCount(selectedParticipants.length);
+                            addParticipantModal.classList.add('hidden');
+                            alert(`${selectedParticipants.length} participant(s) added.`);
+                        } else {
+                            alert("Please select at least one contact to add.");
+                        }
+                    });
+                }
+            }
+
+            closeGroupInfoBtn.addEventListener('click', () => {
+                groupInfoPanel.classList.add('hidden');
+            });
+
+            // --- Edit Group Name Logic ---
+            const editGroupNameBtn = document.getElementById('edit-group-name-btn');
+            const groupNameDisplay = document.getElementById('info-panel-group-name');
+
+            if (editGroupNameBtn && groupNameDisplay) {
+                editGroupNameBtn.addEventListener('click', () => {
+                    const currentName = groupNameDisplay.textContent;
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = currentName;
+                    input.className = 'group-name-input-editor';
+
+                    groupNameDisplay.replaceWith(input);
+                    input.focus();
+                    input.select();
+
+                    const saveName = () => {
+                        const newName = input.value.trim();
+                        const activeContact = document.querySelector('.contact-item.active');
+
+                        if (newName && newName !== currentName && activeContact) {
+                            // Update UI in all places
+                            activeContact.dataset.name = newName;
+                            activeContact.querySelector('h4').textContent = newName;
+                            document.getElementById('chat-header-name').textContent = newName;
+                            groupNameDisplay.textContent = newName;
+                        } else {
+                            groupNameDisplay.textContent = currentName; // Revert if empty or unchanged
+                        }
+                        input.replaceWith(groupNameDisplay);
+                    };
+
+                    input.addEventListener('blur', saveName);
+                    input.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            // We prevent the default form submission behavior if it's inside a form
+                            e.preventDefault();
+                            saveName();
+                        }
+                    });
+                });
+            }
+        }
     }
 
     function handleCallRequest(name, role) {

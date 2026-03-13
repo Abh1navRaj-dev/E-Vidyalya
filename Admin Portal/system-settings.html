@@ -12,7 +12,7 @@
     <nav id="navbar">
         <div class="nav-profile">
             <i class="fa-solid fa-user-shield"></i>
-            <h3>Admin Panel</h3>
+            <h3>E-Vidyalaya</h3>
         </div>
         <div class="user-details">
             <div class="user-info">
@@ -52,39 +52,34 @@
             </header>
             <hr>
             <section class="page-content">
-                <div style="max-width: 600px;">
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-dark);">School Name</label>
-                        <input type="text" value="E-Vidyalaya High School" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                <form id="system-settings-form" style="max-width: 600px;">
+                    <div class="form-group">
+                        <label class="form-label">School Name</label>
+                        <input type="text" value="E-Vidyalaya High School" class="form-input">
                     </div>
                     
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-dark);">Current Academic Session</label>
-                        <select style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <div class="form-group">
+                        <label class="form-label">Current Academic Session</label>
+                        <select class="form-select">
                             <option>2022-2023</option>
                             <option selected>2023-2024</option>
                             <option>2024-2025</option>
                         </select>
                     </div>
 
-                    <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; background: white; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                    <div class="setting-item">
                         <div>
-                            <h4 style="margin-bottom: 5px;">Maintenance Mode</h4>
-                            <p style="font-size: 13px; color: #666;">Prevent users from logging in during updates.</p>
+                            <h4>Maintenance Mode</h4>
+                            <p class="setting-description">Prevent users from logging in during updates.</p>
                         </div>
-                        <input type="checkbox" style="transform: scale(1.5);">
+                        <label class="switch">
+                            <input type="checkbox" class="setting-toggle">
+                            <span class="slider"></span>
+                        </label>
                     </div>
 
-                    <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; background: white; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
-                        <div>
-                            <h4 style="margin-bottom: 5px;">Allow New Registrations</h4>
-                            <p style="font-size: 13px; color: #666;">Enable or disable public signup forms.</p>
-                        </div>
-                        <input type="checkbox" checked style="transform: scale(1.5);">
-                    </div>
-
-                    <button id="save-settings-btn" class="btn" style="background: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px;">Save Changes</button>
-                </div>
+                    <button type="submit" id="save-settings-btn" class="btn btn-primary">Save Changes</button>
+                </form>
             </section>
         </main>
     </div>
